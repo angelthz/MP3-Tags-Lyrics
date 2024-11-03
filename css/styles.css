@@ -1,0 +1,270 @@
+:root{
+    --dark-color: #000000;
+    --white-color: #ffffff;
+    --dark-bg-color: #141414;
+    --dark-alpha-color: #141414;
+    --gray-bg-color: #191919;
+    --main-purple-color: #703bf7;
+    --main-alpha-color: #7856d1ab;
+    --main-hover-color: #8355f6;
+    --border-color: #262626;
+    --opacity-color: #26262698;
+    --font: "Urbanist", sans-serif;
+    --header-height: 8vh;
+    --max-width: 1200px;
+    --top-margin: 1rem;
+    --thick-rounded: 0.5rem;
+    --thin-rounded: 0.3rem;
+    --section-width: 1200px;
+    --shadow:1px 2px 15px 2.5px rgba(38,38,38,0.75);
+}
+
+/* Default Override */
+body{
+    font-family: var(--font);
+    background-color: var(--dark-bg-color);
+}
+:target {
+    scroll-margin-top: 5rem;
+}
+
+
+/* Bootstrap Styles Override */
+.bi-arrow-up{
+    font-size: 1.75rem;
+}
+
+.border{
+    border-color: var(--border-color) !important;
+}
+.border-top{
+    border-color: var(--border-color) !important;
+}
+.border-bottom{
+    border-color: var(--border-color) !important;
+}
+
+.navbar-brand > img{
+    width: auto;
+    height: 32px;
+}
+
+.form-control{
+    background-color: var(--dark-bg-color);
+    border-color: var(--border-color);
+    color: var(--bs-white);
+    /* width: 50%;
+    margin-left: auto;
+    margin-right: auto; */
+}
+
+.form-control:focus{
+    background-color: var(--dark-bg-color);
+    border-color: var(--main-alpha-color);
+    box-shadow: none;
+}
+.form-control::placeholder{
+    color: #676767;
+}
+
+.form-control:disabled {
+    background-color: var(--opacity-color);
+    opacity: 1;
+}
+
+.form-control:focus-within{
+    color: var(--bs-white);
+}
+
+.form-check-input:focus {
+    border-color: var(--main-alpha-color);
+    outline: 0;
+    box-shadow: none;
+  }
+.form-check-input:checked{
+    background-color: var(--main-hover-color);
+    border-color: #703bf7;
+}
+
+.form-check-input[type=checkbox]:indeterminate {
+    border-color: var(--main-alpha-color);
+}
+
+.form-switch .form-check-input:focus {
+    --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23262626'/%3e%3c/svg%3e");
+  }
+  .form-switch .form-check-input:checked {
+    background-position: right center;
+    --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+  }
+
+.btn{
+    opacity: 1;
+    background-color: var(--main-purple-color);
+    color: var(--bs-white);
+}
+
+.btn:hover{
+    background-color: #8355f6;
+    box-shadow: 1px 2px 15px 2.5px rgba(38,38,38,0.75);
+}
+
+textarea{
+    font-size: 2rem;
+    resize: none;
+}
+/* Bootstrap Styles Override */
+
+/* my styles */
+
+.bg-gray{
+    background-color: var(--gray-bg-color) !important;
+}
+
+.bg-dark{
+    background-color: var(--dark-bg-color) !important;
+}
+
+.bg-main-alpha{
+    background-color: #703bf761;
+}
+
+.bg-gray-alpha{
+    background-color: rgba(180, 180, 180, 0.176);
+}
+
+.bg-blur{
+    background-color: #33333355;
+    backdrop-filter: blur(1px);
+}
+
+.hidden{
+    display: none;
+}
+
+.min-vh-5{
+    height: 5vh;
+}
+
+.min-vh-10{
+    height: 10vh;
+}
+
+.min-vh-20{
+    height: 20vh;
+}
+
+.min-vh-65{
+    height: 65vh;
+}
+
+.translate-25{
+    transform: translateX(30%);
+    transform: translateY(30%);
+}
+
+.top-8{
+    top: 8.6%;
+}
+
+.top-10{
+    top: 10%;
+}
+.end-25{
+    right: 2%;
+}
+
+.start-12{
+    left: 12.5%;
+}
+.bottom-10{
+    bottom: 10%;
+}
+
+.fs-10{
+    font-size: 8px;
+}
+/*  */
+#uploader-container{
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+#uploader-container:hover,
+.drag-over{
+    border-color: var(--main-purple-color) !important;
+    box-shadow: var(--shadow);
+}
+
+#uploader-container input[type="file"]{
+    opacity: 0;
+}
+
+#uploader-container label{
+    cursor: pointer;
+}
+
+#uploader-container label>svg{
+    width: 4rem;
+    height: auto;
+    fill: var(--bs-white);
+}
+
+.album{
+    max-width: 320px;
+    height: auto;
+}
+
+#btn-search{
+    width: 13ch;
+    /* background-color: var(--bs-success); */
+}
+
+#btn-download{
+    width: 23ch;
+}
+
+#btn-top{
+    position: fixed;
+    bottom: -10rem;
+    right: 1rem;
+    background-color: var(--main-purple-color);
+    width: 3rem;
+    height: 3rem;
+    transition: all 0.3s ease-in-out;
+}
+
+#btn-top:hover{
+    background-color: var(--main-hover-color);
+    box-shadow: var(--shadow);
+}
+
+#track-form > div > svg,
+.info-svg > svg{
+    top: 18%;
+    right: 2%;
+}
+
+/* Media queries */
+
+/* // X-Small devices (portrait phones, less than 576px) */
+/* // No media query for `xs` since this is the default in Bootstrap */
+
+/* // Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) { }
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {  }
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .container-lg-max{
+        max-width: 920px;
+    }
+  }
+
+/* // X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {  }
+
+/* // XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {  }
