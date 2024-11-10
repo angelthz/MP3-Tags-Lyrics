@@ -7,7 +7,7 @@ export function asyncAudioReader(file){
         // fileReader.onloadend = ()=> resolve(fileReader);
         fileReader.addEventListener("loadstart", e=>{
             console.log("starting")
-            document.querySelector(".upload-loader").classList.remove("visually-hidden");
+            // document.querySelector(".upload-loader").classList.remove("visually-hidden");
             // location.hash =  "";
         });
 
@@ -20,7 +20,7 @@ export function asyncAudioReader(file){
             
         });
         fileReader.addEventListener("loadend", e => {
-            document.querySelector(".upload-loader").classList.add("visually-hidden");
+            // document.querySelector(".upload-loader").classList.add("visually-hidden");
             location.hash = "editor";
             resolve(fileReader.result) 
         });

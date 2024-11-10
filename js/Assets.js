@@ -1,0 +1,1 @@
+export const DEFAULT_ALBUM_IMG = "assets/defaul-album.png";

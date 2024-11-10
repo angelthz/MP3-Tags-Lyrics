@@ -1,4 +1,5 @@
-import generateAlbumImage from "./AlbumImage.js";
+import {downloader} from "./FileDownloader.js"
+import { JPEG_IMG } from "./MIME_Types.js";
 
 export default class Mp3TagReader {
     constructor(buffer) {
@@ -53,13 +54,9 @@ export default class Mp3TagReader {
     }
 
     getAlbumImage(){
-        try{
-            return generateAlbumImage(this.getCompleteTags().APIC[0].data);
-        }
-        catch(err){
-            console.log(err)
-            return false;
-        }
+        if(!this.getCompleteTags().hasOwnProperty("APIC")) return null;
+        let imgUint8Array = new Uint8Array(this.getCompleteTags().APIC[0].data);
+        return downloader.getUrl(imgUint8Array, JPEG_IMG);
     }
     
     read() {
@@ -97,6 +94,6 @@ export default class Mp3TagReader {
 
     getAudioArray(){
         this.save();
-        return {fileName: this.getSongTitle(), fileArray: this.mp3Tag.buffer};
+        return this.mp3Tag.buffer;
     }
 }
