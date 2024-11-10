@@ -1,4 +1,4 @@
-import {downloadAudio, downloader} from "./FileDownloader.js";
+import {downloader} from "./FileDownloader.js";
 import {asyncAudioReader} from "./AudioReader.js";
 import {asyncFetchLyrics} from "./FetchLyrics.js";
 import Mp3TagReader from "./Mp3TagReader.js";
