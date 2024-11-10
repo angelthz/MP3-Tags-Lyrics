@@ -30,6 +30,10 @@ body{
 
 
 /* Bootstrap Styles Override */
+.container{
+    padding: 0;
+}
+
 .bi-arrow-up{
     font-size: 1.75rem;
 }
@@ -53,9 +57,6 @@ body{
     background-color: var(--dark-bg-color);
     border-color: var(--border-color);
     color: var(--bs-white);
-    /* width: 50%;
-    margin-left: auto;
-    margin-right: auto; */
 }
 
 .form-control:focus{
@@ -138,73 +139,83 @@ textarea{
     backdrop-filter: blur(1px);
 }
 
+.bg-trans{
+    background-color: transparent !important;
+}
+
+.my-btn{
+    height: 2.5rem;
+    border: none;
+    border-radius: var(--thin-rounded);
+    background-color: var(--main-purple-color);
+    color: var(--white-color);
+    transition: all 0.3s ease-in-out;
+}
+
+.my-btn:hover{
+    background-color: var(--main-hover-color);
+    box-shadow: var(--shadow);
+}
+
 .hidden{
     display: none;
 }
 
-.min-vh-5{
-    height: 5vh;
+.h-90{
+    margin: 1.75rem;
+    height: 90%;
 }
 
-.min-vh-10{
-    height: 10vh;
-}
-
-.min-vh-20{
-    height: 20vh;
-}
-
-.min-vh-65{
-    height: 65vh;
-}
-
-.translate-25{
-    transform: translateX(30%);
-    transform: translateY(30%);
-}
 
 .top-8{
     top: 8.6%;
 }
 
-.top-10{
-    top: 10%;
-}
-.end-25{
-    right: 2%;
+/*  my styles */
+
+#header{
+    position: fixed;
+    top: 0;
+    z-index: 99;
+    width: 100%;
+    height: 8vh;
 }
 
-.start-12{
-    left: 12.5%;
-}
-.bottom-10{
-    bottom: 10%;
+#upload-section{
+    padding-top: 8vh;
+    height: 96vh;
+    margin: 0 auto;
 }
 
-.fs-10{
-    font-size: 8px;
+#description{
+    height: calc(25% - 8vh);
 }
-/*  */
+
 #uploader-container{
+    height: calc(100% - (25% - 8vh));
+}
+
+#footer{
+    height: 4vh;
+}
+
+
+#uploader{
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
 
-#uploader-container:hover,
+#uploader:hover,
 .drag-over{
     border-color: var(--main-purple-color) !important;
     box-shadow: var(--shadow);
 }
 
-#uploader-container input[type="file"]{
-    opacity: 0;
-}
-
-#uploader-container label{
+#uploader label{
     cursor: pointer;
 }
 
-#uploader-container label>svg{
+#uploader label>svg{
     width: 4rem;
     height: auto;
     fill: var(--bs-white);
@@ -217,27 +228,20 @@ textarea{
 
 #btn-search{
     width: 13ch;
-    /* background-color: var(--bs-success); */
 }
 
 #btn-download{
-    width: 23ch;
+    width: 24ch;
 }
 
 #btn-top{
     position: fixed;
-    bottom: -10rem;
+    bottom: 1rem;
     right: 1rem;
-    background-color: var(--main-purple-color);
     width: 3rem;
     height: 3rem;
-    transition: all 0.3s ease-in-out;
 }
 
-#btn-top:hover{
-    background-color: var(--main-hover-color);
-    box-shadow: var(--shadow);
-}
 
 #track-form > div > svg,
 .info-svg > svg{
@@ -259,7 +263,11 @@ textarea{
 /* // Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     .container-lg-max{
-        max-width: 920px;
+        max-width: 1024px;
+    }
+
+    .container-sm{
+        max-width: 840px;
     }
   }
 
