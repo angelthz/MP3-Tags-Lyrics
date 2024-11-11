@@ -1,122 +1,275 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MP3 Lyrics</title>
-    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
-    <meta name="description" content="Add Synced Lyrics to your MP3 Files">
-  </head>
-  <body>
-    <header class="bg-gray border-bottom" id="header" data-bs-theme="dark">
-      <nav class="bg-gray container navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container">
-          <a class="navbar-brand fs-2 fw-semibold" href="index.html">
-            <img src="/assets/favicon.ico" alt="Logo">
-            <small>MP3 Tags & Lyrics</small>
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="https://github.com/angelthz" target="_blank" rel="noopener">Github</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#contact.html" target="_blank" rel="noopener">Contact</a>
-              </li>
-            </ul>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MP3 Lyrics</title>
+  <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <meta name="description" content="Add Synced Lyrics to your MP3 Files">
+</head>
+
+<body>
+  <header class="bg-gray border-bottom" id="header" data-bs-theme="dark">
+    <nav class="bg-gray container navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container">
+        <a class="navbar-brand fs-2 fw-semibold" href="index.html">
+          <img src="/assets/favicon.ico" alt="Logo">
+          <small>MP3 Tags & Lyrics</small>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://github.com/angelthz" target="_blank" rel="noopener">Github</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact.html" target="_blank" rel="noopener">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main class="bg-dark px-3" id="home">
+    <section class="text-white container container-lg-max " id="upload-section">
+      <article class="text-center py-3 " id="description">
+        <h1 class="my-0">MP3 Tags & Lyrics Editor</h1>
+        <p class="my-0">A simple tool to edit all tags from mp3 files and fetch Synced Lyrics.</p>
+      </article>
+      <article class="" id="uploader-container">
+        <form class="bg-gray border w-75 h-90 position-relative mx-auto bg-warning" id="uploader">
+          <input class="visually-hidden" type="file" id="default-input">
+          <label
+            class="position-absolute fs-2 text-center start-0 top-0 end-0 bottom-0 d-flex flex-column justify-content-center align-items-center px-3"
+            for="default-input" id="drag-input">
+            <svg class="me-2 xmlns=" http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+              fill="#5f6368">
+              <path
+                d="M440-320v-326L336-542l-56-58 200-200 200 200-56 58-104-104v326h-80ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z" />
+            </svg>
+            <small class="ms-2">Click here to upload your files or Drag and drop your files here.</small>
+          </label>
+          <div
+            class="visually-hidden bg-blur position-absolute start-0 top-0 end-0 bottom-0 d-flex justify-content-center align-items-center rounded upload-loader"
+            id="upload-loader">
+            <svg class="w-25 h-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+              <radialGradient id="a12" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)">
+                <stop offset="0" stop-color="#703BF7"></stop>
+                <stop offset=".3" stop-color="#703BF7" stop-opacity=".9"></stop>
+                <stop offset=".6" stop-color="#703BF7" stop-opacity=".6"></stop>
+                <stop offset=".8" stop-color="#703BF7" stop-opacity=".3"></stop>
+                <stop offset="1" stop-color="#703BF7" stop-opacity="0"></stop>
+              </radialGradient>
+              <circle transform-origin="center" fill="none" stroke="url(#a12)" stroke-width="15" stroke-linecap="round"
+                stroke-dasharray="200 1000" stroke-dashoffset="0" cx="100" cy="100" r="70">
+                <animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="2" values="360;0"
+                  keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite"></animateTransform>
+              </circle>
+              <circle transform-origin="center" fill="none" opacity=".2" stroke="#703BF7" stroke-width="15"
+                stroke-linecap="round" cx="100" cy="100" r="70"></circle>
+            </svg>
+          </div>
+        </form>
+      </article>
+    </section>
+    <section class="visually-hidden container container-sm bg-gray text-white mb-4" id="editor">
+      <article class="py-2 text-center border-bottom editor-title mt-5">
+        <h2>Editor</h2>
+      </article>
+      <article class="px-5 editor-track-info">
+        <figure class="album mx-auto my-4">
+          <img class="img-fluid rounded" src="assets/defaul-album.png" alt="Album Image" id="album-image">
+        </figure>
+        <div class="form-check form-switch d-flex justify-content-end">
+          <input class="form-check-input me-2 order-1 " type="checkbox" role="switch" id="flexSwitchCheckDefault">
+          <label class="form-check-label me-5" for="flexSwitchCheckDefault" data-bs-toggle="tooltip"
+            data-bs-placement="top" data-bs-title="Enable all Tags edition.">Enable Advance Mode</label>
+        </div>
+        <form class="" id="track-form">
+          <label class="form-label mx-auto" for="song">Song</label>
+          <div class="position-relative mb-4">
+            <input class="form-control ps-3 pe-5" type="text" name="song" id="song" placeholder="Song Name" required
+              autocomplete="off">
+            <svg class="position-absolute" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+              width="24px" fill="#5f6368">
+              <path
+                d="M400-240q50 0 85-35t35-85v-280h120v-80H460v256q-14-8-29-12t-31-4q-50 0-85 35t-35 85q0 50 35 85t85 35Zm80 160q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
+            </svg>
+          </div>
+          <label for="album">Album</label>
+          <div class="position-relative mb-4">
+            <input class="form-control ps-3 pe-5" type="text" name="album" id="album" placeholder="Album Name" required
+              autocomplete="off">
+            <svg class="position-absolute" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+              width="24px" fill="#5f6368">
+              <path
+                d="M480-300q75 0 127.5-52.5T660-480q0-75-52.5-127.5T480-660q-75 0-127.5 52.5T300-480q0 75 52.5 127.5T480-300Zm0-140q-17 0-28.5-11.5T440-480q0-17 11.5-28.5T480-520q17 0 28.5 11.5T520-480q0 17-11.5 28.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
+            </svg>
+          </div>
+          <label for="album">Artist</label>
+          <div class="position-relative mb-4">
+            <input class="form-control ps-3 pe-5" type="text" name="artist" id="artist" placeholder="Artist Name"
+              required autocomplete="off">
+            <svg class="position-absolute" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+              width="24px" fill="#5f6368">
+              <path
+                d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z" />
+            </svg>
+          </div>
+          <div class="position-relative">
+            <input class="my-btn mb-4" type="submit" value="Search Lyrics" id="btn-search">
+            <small class="position-absolute" style="right:2%; top:12%;" data-bs-toggle="tooltip" data-bs-placement="top"
+              data-bs-title="Lyrics not found? Try with correct Tags.">
+              <svg fill="#5f6368" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                fill="#5f6368">
+                <path
+                  d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
+              </svg>
+            </small>
+          </div>
+        </form>
+      </article>
+      <article class="px-5 mb-4 editor-track-lyrics" id="lyrics">
+        <div class="position-relative">
+          <label class="form-label" for="Lyrics">Lyrics</label>
+          <small class="position-absolute" style="right:2%; top:12%;" data-bs-toggle="tooltip" data-bs-placement="top"
+              data-bs-title="Not sync lyrics found? Copy/Paste song lyrics here and launch the Sync Tool.">
+              <svg fill="#5f6368" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                fill="#5f6368">
+                <path
+                  d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
+              </svg>
+            </small>
+          <textarea class="fs-5 p-4 form-control" name="Lyrics" id="lyrics-textarea" placeholder="Lyrics"
+            rows="10"></textarea>
+          <div
+            class="visually-hidden bg-gray-alpha position-absolute start-0 top-8 end-0 bottom-0 d-flex justify-content-center align-items-center rounded"
+            id="lyrics-loader">
+            <svg class="w-25 h-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+              <radialGradient id="a12" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)">
+                <stop offset="0" stop-color="#703BF7"></stop>
+                <stop offset=".3" stop-color="#703BF7" stop-opacity=".9"></stop>
+                <stop offset=".6" stop-color="#703BF7" stop-opacity=".6"></stop>
+                <stop offset=".8" stop-color="#703BF7" stop-opacity=".3"></stop>
+                <stop offset="1" stop-color="#703BF7" stop-opacity="0"></stop>
+              </radialGradient>
+              <circle transform-origin="center" fill="none" stroke="url(#a12)" stroke-width="15" stroke-linecap="round"
+                stroke-dasharray="200 1000" stroke-dashoffset="0" cx="100" cy="100" r="70">
+                <animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="2" values="360;0"
+                  keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite"></animateTransform>
+              </circle>
+              <circle transform-origin="center" fill="none" opacity=".2" stroke="#703BF7" stroke-width="15"
+                stroke-linecap="round" cx="100" cy="100" r="70"></circle>
+            </svg>
+          </div>
+          <div class="position-relative mt-4">
+            <button type="button" class="my-btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Launch Sync Tool</button>
           </div>
         </div>
-      </nav>
-    </header>
-    <main class="bg-dark px-3" id="home">
-      <section class="text-white container container-lg-max " id="upload-section">
-          <article class="text-center py-3 " id="description">
-            <h1 class="my-0">MP3 Tags & Lyrics Editor</h1>
-            <p class="my-0">A simple tool to edit all tags from mp3 files and fetch Synced Lyrics.</p>
-          </article>
-          <article class="" id="uploader-container">
-            <form class="bg-gray border w-75 h-90 position-relative mx-auto bg-warning" id="uploader">
-              <input class="visually-hidden" type="file" id="default-input">
-              <label class="position-absolute fs-2 text-center start-0 top-0 end-0 bottom-0 d-flex flex-column justify-content-center align-items-center px-3" for="default-input" id="drag-input">
-                <svg class="me-2 xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M440-320v-326L336-542l-56-58 200-200 200 200-56 58-104-104v326h-80ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></svg>
-                <small class="ms-2">Click here to upload your files or Drag and drop your files here.</small>
-              </label>
-              <div class="visually-hidden bg-blur position-absolute start-0 top-0 end-0 bottom-0 d-flex justify-content-center align-items-center rounded upload-loader" id="upload-loader">
-                <svg class="w-25 h-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><radialGradient id="a12" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)"><stop offset="0" stop-color="#703BF7"></stop><stop offset=".3" stop-color="#703BF7" stop-opacity=".9"></stop><stop offset=".6" stop-color="#703BF7" stop-opacity=".6"></stop><stop offset=".8" stop-color="#703BF7" stop-opacity=".3"></stop><stop offset="1" stop-color="#703BF7" stop-opacity="0"></stop></radialGradient><circle transform-origin="center" fill="none" stroke="url(#a12)" stroke-width="15" stroke-linecap="round" stroke-dasharray="200 1000" stroke-dashoffset="0" cx="100" cy="100" r="70"><animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="2" values="360;0" keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite"></animateTransform></circle><circle transform-origin="center" fill="none" opacity=".2" stroke="#703BF7" stroke-width="15" stroke-linecap="round" cx="100" cy="100" r="70"></circle></svg>
+      </article>
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog mx-auto modal-xs modal-lg modal-dialog-scrollable">
+          <div class="modal-content bg-gray">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Lyric Sync</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="player-container w-100 bg-gray  mx-auto">
+              <audio class="d-block mx-auto song visually-hidden" src="" preload="auto" controls></audio>
+              <div class="mx-auto player-bar w-100">
+                <div class="progress-bar">
+                  <input type="range" class="progress-audio d-block w-75 my-2 mx-auto">
+                </div>
+                <div class="mx-auto w-75 d-flex justify-content-between">
+                  <small class="current">00:00</small>
+                  <small class="duration">00:00</small>
+                </div>
+                <div class="controls-bar d-flex justify-content-center">
+                  <div class="control m-2">
+                    <svg class="backward-btn" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                      width="24px" fill="#5f6368">
+                      <path
+                        d="M860-240 500-480l360-240v480Zm-400 0L100-480l360-240v480Zm-80-240Zm400 0Zm-400 90v-180l-136 90 136 90Zm400 0v-180l-136 90 136 90Z" />
+                    </svg>
+                  </div>
+                  <div class="control m-2">
+                    <svg class="play-btn" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                      width="24px" fill="#5f6368">
+                      <path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z" />
+                    </svg>
+                    <svg class="resume-btn visually-hidden" xmlns="http://www.w3.org/2000/svg" height="24px"
+                      viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                      <path
+                        d="M520-200v-560h240v560H520Zm-320 0v-560h240v560H200Zm400-80h80v-400h-80v400Zm-320 0h80v-400h-80v400Zm0-400v400-400Zm320 0v400-400Z" />
+                    </svg>
+                  </div>
+                  <div class="control m-2">
+                    <svg class="forward-btn" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                      width="24px" fill="#5f6368">
+                      <path
+                        d="M100-240v-480l360 240-360 240Zm400 0v-480l360 240-360 240ZM180-480Zm400 0Zm-400 90 136-90-136-90v180Zm400 0 136-90-136-90v180Z" />
+                    </svg>
+                  </div>
+                </div>
               </div>
-            </form>
-          </article>
-      </section>
-      <section class="visually-hidden container container-sm bg-gray text-white mb-4" id="editor">
-        <article class="py-2 text-center border-bottom editor-title mt-5">
-          <h2>Editor</h2>
-        </article>
-        <article class="px-5 editor-track-info">
-          <figure class="album mx-auto my-4">
-            <img class="img-fluid rounded" src="assets/defaul-album.png" alt="Album Image" id="album-image">
-          </figure>
-          <div class="form-check form-switch d-flex justify-content-end">
-            <input class="form-check-input me-2 order-1 " type="checkbox" role="switch" id="flexSwitchCheckDefault">
-            <label class="form-check-label me-5" for="flexSwitchCheckDefault" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Enable all Tags edition.">Enable Advance Mode</label>
-          </div>
-          <form class="" id="track-form">
-            <label class="form-label mx-auto" for="song">Song</label>
-            <div class="position-relative mb-4">
-                <input class="form-control ps-3 pe-5" type="text" name="song" id="song" placeholder="Song Name" required autocomplete="off">
-                <svg class="position-absolute" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M400-240q50 0 85-35t35-85v-280h120v-80H460v256q-14-8-29-12t-31-4q-50 0-85 35t-35 85q0 50 35 85t85 35Zm80 160q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
             </div>
-            <label for="album">Album</label>
-            <div class="position-relative mb-4">
-              <input class="form-control ps-3 pe-5" type="text" name="album" id="album" placeholder="Album Name" required autocomplete="off">
-              <svg class="position-absolute" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M480-300q75 0 127.5-52.5T660-480q0-75-52.5-127.5T480-660q-75 0-127.5 52.5T300-480q0 75 52.5 127.5T480-300Zm0-140q-17 0-28.5-11.5T440-480q0-17 11.5-28.5T480-520q17 0 28.5 11.5T520-480q0 17-11.5 28.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
+            <div class="modal-body">
+              <div class="table-lyric border rounded">
+                <div class="lyric-row row fs-6 text-white align-items-center">
+                  <span class="time-col col-2 text-center">[00:00:00]</span>
+                  <span class="lyric-col col-8 ">I know I belong here on earth I know I belong here on earth I know I belong here on earthI know I belong here on earth</span>
+                  <div  class="remove-col btn-col col-1 h-100 d-flex justify-content-center align-items-center">
+                    <svg class="ignore-events " xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                      <path d="M200-440v-80h560v80H200Z" />
+                    </svg>
+                  </div>
+                  <div  class="add-col btn-col col-1 h-100  d-flex justify-content-center align-items-center">
+                    <svg class="ignore-events d-block mx-auto" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                      <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
             </div>
-            <label for="album">Artist</label>
-            <div class="position-relative mb-4">
-              <input class="form-control ps-3 pe-5" type="text" name="artist" id="artist" placeholder="Artist Name" required autocomplete="off">
-              <svg class="position-absolute" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"/></svg>
-            </div> 
-            <div class="position-relative">
-              <input class="my-btn mb-4" type="submit" value="Search Lyrics" id="btn-search">
-            <small  class="position-absolute" style="right:2%; top:12%;" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Lyrics not found? Try with correct Tags.">
-              <svg fill="#5f6368" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
-            </small>
-            </div>
-          </form>
-        </article>
-        <article class="px-5 mb-4 editor-track-lyrics" id="lyrics">
-          <div class="position-relative">
-            <label class="form-label" for="Lyrics">Lyrics</label>
-            <textarea class="fs-5 p-4 form-control" name="Lyrics" id="lyrics-textarea" placeholder="Lyrics" rows="10" ></textarea>
-            <div class="visually-hidden bg-gray-alpha position-absolute start-0 top-8 end-0 bottom-0 d-flex justify-content-center align-items-center rounded" id="lyrics-loader">
-              <svg class="w-25 h-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><radialGradient id="a12" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)"><stop offset="0" stop-color="#703BF7"></stop><stop offset=".3" stop-color="#703BF7" stop-opacity=".9"></stop><stop offset=".6" stop-color="#703BF7" stop-opacity=".6"></stop><stop offset=".8" stop-color="#703BF7" stop-opacity=".3"></stop><stop offset="1" stop-color="#703BF7" stop-opacity="0"></stop></radialGradient><circle transform-origin="center" fill="none" stroke="url(#a12)" stroke-width="15" stroke-linecap="round" stroke-dasharray="200 1000" stroke-dashoffset="0" cx="100" cy="100" r="70"><animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="2" values="360;0" keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite"></animateTransform></circle><circle transform-origin="center" fill="none" opacity=".2" stroke="#703BF7" stroke-width="15" stroke-linecap="round" cx="100" cy="100" r="70"></circle></svg>
+            <div class="modal-footer">
+              <!-- <button type="button" class="my-btn btn-primary save-modal-btn">Save & Close</button> -->
+              <button type="button" class="my-btn btn-secondary close-modal-btn" data-bs-dismiss="modal">Save &Close</button>
             </div>
           </div>
-        </article>
-        <article class="py-3 border-top editor-track-download">
-          <button class="my-btn mx-auto d-block" id="btn-download">Save changes & Download</button>
-        </article>
+        </div>
+      </div>
+      <article class="py-3 border-top editor-track-download">
+        <button class="my-btn mx-auto d-block" id="btn-download">Save changes & Download</button>
+      </article>
     </section>
     <a class="my-btn d-flex justify-content-center align-items-center rounded-circle" href="#home" id="btn-top">
       <i class="bi bi-arrow-up text-white"></i>
     </a>
-    </main>
-    <footer class="bg-gray border-top text-white py-1" id="footer">
-      <small class="d-block text-center">@angelthz</small>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mp3tag.js@latest/dist/mp3tag.min.js"></script>
-    <script src="js/App.js" type="module"></script>
-  </body>
+  </main>
+  <footer class="bg-gray border-top text-white py-1" id="footer">
+    <small class="d-block text-center">@angelthz</small>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mp3tag.js@latest/dist/mp3tag.min.js"></script>
+  <script src="js/App.js" type="module"></script>
+</body>
+
 </html>

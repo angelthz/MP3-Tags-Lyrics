@@ -114,9 +114,66 @@ textarea{
     font-size: 2rem;
     resize: none;
 }
+
+.modal{
+    backdrop-filter: blur(0.75px);
+}
+
+.modal-header,
+.modal-footer{
+    border-color: var(--border-color);
+}
+
+.btn-close {
+	--bs-btn-close-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e");
+}
+
+tbody{
+    border: none;
+}
+
+.table>:not(caption)>*>*{
+    border: none;
+    background-color: var(--dark-bg-color);
+    color: var(--white-color);
+}
+
+.table>:not(caption)>:first-of-type>:first-child{
+    border-top-left-radius: var(--thin-rounded);
+    /* background-color: red; */
+}
+.table>:not(caption)>:first-of-type>:last-child{
+    border-top-right-radius: var(--thin-rounded);
+    /* background-color: red; */
+}
+
+.table>:not(caption)>:last-of-type>:first-child{
+    border-bottom-left-radius: var(--thin-rounded);
+    /* background-color: red; */
+}
+.table>:not(caption)>:last-of-type>:last-child{
+    border-bottom-right-radius: var(--thin-rounded);
+    /* background-color: red; */
+}
+
+.lyric-col p{
+    white-space: text-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.list-group-item{
+    height: 3rem;
+}
+
+
 /* Bootstrap Styles Override */
 
 /* my styles */
+
+.fs-7{
+    font-size: 1.2rem;
+}
 
 .bg-gray{
     background-color: var(--gray-bg-color) !important;
@@ -171,6 +228,9 @@ textarea{
     top: 8.6%;
 }
 
+.ignoere-events{
+    pointer-events: none;
+}
 /*  my styles */
 
 #header{
@@ -247,6 +307,116 @@ textarea{
 .info-svg > svg{
     top: 18%;
     right: 2%;
+}
+
+.table-lyric{
+    /* padding: 0 1.5rem; */
+    /* border-radius: var(--thin-rounded); */
+}
+
+.table-lyric>div:first-of-type{
+    border-top-left-radius: var(--thin-rounded);
+    border-top-right-radius: var(--thin-rounded);
+}
+
+.table-lyric>div:last-of-type{
+    border-bottom-left-radius: var(--thin-rounded);
+    border-bottom-right-radius: var(--thin-rounded);
+}
+
+.table-lyric>div:first-of-type div:last-of-type{
+    border-top-right-radius: var(--thin-rounded);
+}
+
+.table-lyric>div:last-of-type div:last-of-type{
+    border-bottom-right-radius: var(--thin-rounded);
+}
+
+.remove-col{
+    border-top-left-radius: var(--thin-rounded);
+    border-bottom-left-radius: var(--thin-rounded);
+}
+
+.lyric-row{
+    margin: 0 auto;
+    width: 100%;
+    height: 3rem;
+    background-color: var(--dark-bg-color);
+    border-bottom: thin solid var(--border-color);
+}
+
+.lyric-row.active{
+    background-color: var(--main-alpha-color);
+}
+
+
+.lyric-col{
+    overflow-x: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+.btn-col:hover{
+    background-color: var(--main-alpha-color);
+    cursor: pointer;
+}
+
+.btn-col > svg{
+    fill: white;
+}
+
+::-webkit-scrollbar {
+    /* // Width of vertical scroll bar */
+    width: .2rem;
+    /* // Height of horizontal scroll bar */
+    height: 10px;
+
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: .2rem;
+    background: #c2c9d2;
+  }
+
+
+  input[type="range"]{
+    accent-color: blueviolet;
+    width: 100%;
+    height: 1.5rem;
+    padding: 0;
+}
+
+
+.control{
+    padding: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    /* background-color: salmon; */
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1.8px solid #3333334f;
+    transition: all 0.3s ease-in-out;
+}
+
+.control:active{
+    border-color: var(--main-purple-color);
+}
+
+.control > svg{
+    /* background-color: greenyellow; */
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+.control > svg:active{
+    fill: var(--main-purple-color);
+}
+
+.control svg>path{
+    pointer-events: none;
 }
 
 /* Media queries */
