@@ -148,15 +148,14 @@
         <div class="position-relative">
           <label class="form-label" for="Lyrics">Lyrics</label>
           <small class="position-absolute" style="right:2%; top:12%;" data-bs-toggle="tooltip" data-bs-placement="top"
-              data-bs-title="Not sync lyrics found? Copy/Paste song lyrics here and launch the Sync Tool.">
+              data-bs-title="Sync lyrics not found? Copy/Paste/Write song lyrics here then launch the Sync Tool.">
               <svg fill="#5f6368" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                 fill="#5f6368">
                 <path
                   d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
               </svg>
             </small>
-          <textarea class="fs-5 p-4 form-control" name="Lyrics" id="lyrics-textarea" placeholder="Lyrics"
-            rows="10"></textarea>
+          <textarea class="fs-5 p-4 form-control" name="Lyrics" id="lyrics-textarea" placeholder="Lyrics"rows="10"></textarea>
           <div
             class="visually-hidden bg-gray-alpha position-absolute start-0 top-8 end-0 bottom-0 d-flex justify-content-center align-items-center rounded"
             id="lyrics-loader">
@@ -182,7 +181,7 @@
           </div>
         </div>
       </article>
-      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      <div class="modal fade sync-modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog mx-auto modal-xs modal-lg modal-dialog-scrollable">
           <div class="modal-content bg-gray">
@@ -191,7 +190,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="player-container w-100 bg-gray  mx-auto">
-              <audio class="d-block mx-auto song visually-hidden" src="" preload="auto" controls></audio>
+              <audio class="d-block mx-auto song visually-hidden" src="" preload="auto" id="song-player"></audio>
               <div class="mx-auto player-bar w-100">
                 <div class="progress-bar">
                   <input type="range" class="progress-audio d-block w-75 my-2 mx-auto">
@@ -201,41 +200,37 @@
                   <small class="duration">00:00</small>
                 </div>
                 <div class="controls-bar d-flex justify-content-center">
-                  <div class="control m-2">
-                    <svg class="backward-btn" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
-                      width="24px" fill="#5f6368">
-                      <path
-                        d="M860-240 500-480l360-240v480Zm-400 0L100-480l360-240v480Zm-80-240Zm400 0Zm-400 90v-180l-136 90 136 90Zm400 0v-180l-136 90 136 90Z" />
-                    </svg>
+                  <div class="time-control control m-2">
+                    <svg class="backward-btn" width="54" height="32" viewBox="0 0 54 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path class="ignore-events" d="M24.5852 13.8732C26.3035 12.632 28.5513 11.0475 29.6179 10.4463C31.3944 9.44554 34.4005 7.71755 36.2778 6.73233C38.1551 5.74906 40.0189 4.80845 41.8633 3.91245C44.5803 2.5896 47.3286 1.33186 50.1057 0.140333C51.1219 -0.294091 52.3088 0.328454 52.4019 1.34276C52.655 4.12811 52.8303 6.91999 52.9275 9.71512C53.064 13.5811 53.064 17.4506 52.9275 21.3166C52.8247 24.2102 52.6482 27.0087 52.4039 29.687C52.3088 30.7032 51.1239 31.3258 50.1076 30.8894C47.3292 29.6986 44.5797 28.4415 41.8613 27.1192C40.0189 26.2232 38.1551 25.2826 36.2759 24.2994C34.4005 23.3141 31.3227 21.5396 29.5462 20.5369C28.4853 19.9396 26.2802 18.3842 24.5852 17.1624H22V13.8732H24.5852Z"/>
+                      <path class="ignore-events" d="M2.5852 0.000696779V13.8732C4.30351 12.632 6.55126 11.0475 7.61793 10.4463C9.39441 9.44554 12.4005 7.71755 14.2778 6.73233C16.1551 5.74906 18.0189 4.80845 19.8633 3.91245C22.5803 2.5896 25.3286 1.33186 28.1057 0.140333C29.1219 -0.294091 30.3088 0.328454 30.4019 1.34276C30.655 4.12811 30.8303 6.91999 30.9275 9.71512C31.064 13.5811 31.064 17.4506 30.9275 21.3166C30.8247 24.2102 30.6482 27.0087 30.4039 29.687C30.3088 30.7032 29.1239 31.3258 28.1076 30.8894C25.3292 29.6986 22.5797 28.4415 19.8613 27.1192C18.0189 26.2232 16.1551 25.2826 14.2759 24.2994C12.4005 23.3142 9.32266 21.5396 7.54617 20.5369C6.48532 19.9396 4.28023 18.3842 2.5852 17.1624V31.031H-9.53674e-06V0.000696779H2.5852Z"/>
+                    </svg>                      
                   </div>
                   <div class="control m-2">
-                    <svg class="play-btn" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
-                      width="24px" fill="#5f6368">
-                      <path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z" />
+                    <svg class="play-btn" viewBox="0 0 24 24" >
+                      <path class="ignore-events" d="M16.04 9.009a93.31 93.31 0 0 0-5.18-2.992 85.246 85.246 0 0 0-3.861-1.945.756.756 0 0 0-1.075.62 85.122 85.122 0 0 0-.246 4.317 92.993 92.993 0 0 0 0 5.982c.048 1.492.131 2.935.246 4.316.043.524.6.845 1.074.62a85.293 85.293 0 0 0 3.861-1.944 93.24 93.24 0 0 0 5.181-2.992 85.086 85.086 0 0 0 3.652-2.396.725.725 0 0 0 0-1.19A84.99 84.99 0 0 0 16.04 9.01Z"></path>
                     </svg>
-                    <svg class="resume-btn visually-hidden" xmlns="http://www.w3.org/2000/svg" height="24px"
-                      viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-                      <path
-                        d="M520-200v-560h240v560H520Zm-320 0v-560h240v560H200Zm400-80h80v-400h-80v400Zm-320 0h80v-400h-80v400Zm0-400v400-400Zm320 0v400-400Z" />
+                    <svg class="resume-btn visually-hidden" viewBox="0 0 24 24">
+                      <path class="ignore-events" d="M5.001 11.58c.02-2.585.249-4.847.55-6.753A.97.97 0 0 1 6.503 4H11v16H6.521a.968.968 0 0 1-.95-.823A45.403 45.403 0 0 1 5 11.579ZM17.48 4c.468 0 .873.344.95.823a45.4 45.4 0 0 1 .57 7.598 45.347 45.347 0 0 1-.55 6.752.97.97 0 0 1-.951.827H13V4h4.479Z" clip-rule="evenodd"></path>
                     </svg>
                   </div>
-                  <div class="control m-2">
-                    <svg class="forward-btn" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
-                      width="24px" fill="#5f6368">
-                      <path
-                        d="M100-240v-480l360 240-360 240Zm400 0v-480l360 240-360 240ZM180-480Zm400 0Zm-400 90 136-90-136-90v180Zm400 0 136-90-136-90v180Z" />
-                    </svg>
+                  <div class="time-control control m-2">
+                    <svg class="forward-btn" width="54" height="32" viewBox="0 0 54 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path class="ignore-events" d="M28.4446 13.8732C26.7263 12.632 24.4786 11.0475 23.4119 10.4463C21.6354 9.44554 18.6294 7.71755 16.752 6.73233C14.8747 5.74906 13.0109 4.80845 11.1666 3.91245C8.44955 2.5896 5.70129 1.33186 2.92416 0.140333C1.90792 -0.294091 0.721009 0.328454 0.627918 1.34276C0.374854 4.12811 0.199594 6.91999 0.102342 9.71512C-0.034114 13.5811 -0.034114 17.4506 0.102342 21.3166C0.20513 24.2102 0.381615 27.0087 0.625978 29.687C0.721009 30.7032 1.90598 31.3258 2.92222 30.8894C5.70064 29.6986 8.45019 28.4415 11.1685 27.1192C13.0109 26.2232 14.8747 25.2826 16.754 24.2994C18.6294 23.3141 21.7072 21.5396 23.4837 20.5369C24.5445 19.9396 26.7496 18.3842 28.4446 17.1624H31.0299V13.8732H28.4446Z"/>
+                      <path class="ignore-events" d="M50.4446 0.000696779V13.8732C48.7263 12.632 46.4786 11.0475 45.4119 10.4463C43.6354 9.44554 40.6294 7.71755 38.752 6.73233C36.8747 5.74906 35.0109 4.80845 33.1666 3.91245C30.4496 2.5896 27.7013 1.33186 24.9242 0.140333C23.9079 -0.294091 22.721 0.328454 22.6279 1.34276C22.3749 4.12811 22.1996 6.91999 22.1023 9.71512C21.9659 13.5811 21.9659 17.4506 22.1023 21.3166C22.2051 24.2102 22.3816 27.0087 22.626 29.687C22.721 30.7032 23.906 31.3258 24.9222 30.8894C27.7006 29.6986 30.4502 28.4415 33.1685 27.1192C35.0109 26.2232 36.8747 25.2826 38.754 24.2994C40.6294 23.3142 43.7072 21.5396 45.4837 20.5369C46.5445 19.9396 48.7496 18.3842 50.4446 17.1624V31.031H53.0299V0.000696779H50.4446Z" />
+                      </svg>
                   </div>
                 </div>
               </div>
             </div>
             <div class="modal-body">
-              <div class="table-lyric border rounded">
+              <div class="table-lyric border rounded" id="lyric-table"></div>
+              <template id="lyric-row-template" class="lyric-row-template">
                 <div class="lyric-row row fs-6 text-white align-items-center">
                   <span class="time-col col-2 text-center">[00:00:00]</span>
                   <span class="lyric-col col-8 ">I know I belong here on earth I know I belong here on earth I know I belong here on earthI know I belong here on earth</span>
                   <div  class="remove-col btn-col col-1 h-100 d-flex justify-content-center align-items-center">
-                    <svg class="ignore-events " xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                    <svg class="ignore-events" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
                       <path d="M200-440v-80h560v80H200Z" />
                     </svg>
                   </div>
@@ -245,7 +240,7 @@
                     </svg>
                   </div>
                 </div>
-              </div>
+              </template>
             </div>
             <div class="modal-footer">
               <!-- <button type="button" class="my-btn btn-primary save-modal-btn">Save & Close</button> -->

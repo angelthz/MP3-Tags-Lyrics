@@ -5,6 +5,7 @@ import Mp3TagReader from "./Mp3TagReader.js";
 import {goTopBtn} from "./Utilities.js"
 import { DEFAULT_ALBUM_IMG } from "./Assets.js";
 import { MP3_AUDIO } from "./MIME_Types.js";
+import SyncTool,{ClearLyrics, SyncLyrics} from "./SyncTool.js";
 
 
 const uploaderContainer = document.getElementById("uploader-container");
@@ -13,6 +14,7 @@ const dragInput = uploaderContainer.querySelector("#drag-input");
 const trackForm = document.getElementById("track-form");
 const albumImg = document.getElementById("album-image");
 const lyricsArea = document.getElementById("lyrics-textarea");
+const syncModal = document.querySelector(".sync-modal");
 let track = null;
 let buffer = null;
 let mp3Tags = null;
@@ -102,3 +104,15 @@ document.addEventListener("click", e=>{
     console.log(mp3Tags);
     downloader.downloadFile(mp3Tags.getAudioArray(), mp3Tags.getSongTitle(),".mp3", MP3_AUDIO);
 })
+
+
+lyricsArea.addEventListener("change",e=>ClearLyrics());
+
+syncModal.addEventListener("show.bs.modal",e=>{
+    ClearLyrics();
+    SyncLyrics(mp3Tags.getAudioArray(),lyricsArea.value)
+});
+
+syncModal.addEventListener("hide.bs.modal",e=>{
+    
+});
