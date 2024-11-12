@@ -2,20 +2,21 @@
     --dark-color: #000000;
     --white-color: #ffffff;
     --dark-bg-color: #141414;
-    --dark-alpha-color: #141414;
+    --dark-alpha-color: #09090b;
     --gray-bg-color: #191919;
     --main-purple-color: #703bf7;
     --main-alpha-color: #7856d1ab;
     --main-hover-color: #8355f6;
     --alt-main-alpha: #7856d130;
-    --border-color: rgb(38, 38, 38);
+    --border-color: #222224;
     --opacity-color: #26262698;
     --font: "Urbanist", sans-serif;
+    /* --font: "Open Sans", sans-serif; */
     --header-height: 8vh;
     --max-width: 1200px;
     --top-margin: 1rem;
     --thick-rounded: 0.5rem;
-    --thin-rounded: 0.3rem;
+    --thin-rounded: 0.5rem;
     --section-width: 1200px;
     --shadow:1px 2px 15px 2.5px rgba(38,38,38,0.75);
 }
@@ -39,14 +40,11 @@ body{
     font-size: 1.75rem;
 }
 
-.border{
-    border-color: var(--border-color) !important;
-}
-.border-top{
-    border-color: var(--border-color) !important;
-}
+.border,
+.border-top,
 .border-bottom{
     border-color: var(--border-color) !important;
+    border-width: 1.9px !important;
 }
 
 .navbar-brand > img{
@@ -56,8 +54,10 @@ body{
 
 .form-control{
     background-color: var(--dark-bg-color);
+    border-width: 2px;
     border-color: var(--border-color);
-    color: var(--bs-white);
+    color: #ccc;
+    font-weight: 600;
 }
 
 .form-control:focus{
@@ -75,7 +75,7 @@ body{
 }
 
 .form-control:focus-within{
-    color: var(--bs-white);
+    color: #ccc;
 }
 
 .form-check-input:focus {
@@ -90,6 +90,10 @@ body{
 
 .form-check-input[type=checkbox]:indeterminate {
     border-color: var(--main-alpha-color);
+}
+
+.form-label{
+    font-weight: 600;
 }
 
 .form-switch .form-check-input:focus {
@@ -117,13 +121,15 @@ textarea{
 }
 
 .modal{
-    backdrop-filter: blur(0.75px);
+    background-color: rgba(24,24,27,0.3);
+    /* backdrop-filter: blur(0.75px); */
 }
 
 .modal-header,
 .modal-footer{
     border-color: var(--border-color);
 }
+
 
 .btn-close {
 	--bs-btn-close-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e");
@@ -176,6 +182,10 @@ tbody{
     font-size: 1.2rem;
 }
 
+.fw-500{
+    font-weight: 500;
+}
+
 .bg-gray{
     background-color: var(--gray-bg-color) !important;
 }
@@ -210,12 +220,13 @@ tbody{
     border-radius: var(--thin-rounded);
     background-color: var(--main-purple-color);
     color: var(--white-color);
+    font-weight: 500;
     transition: all 0.3s ease-in-out;
 }
 
 .my-btn:hover{
     background-color: var(--main-hover-color);
-    box-shadow: var(--shadow);
+    /* box-shadow: var(--shadow); */
 }
 
 .hidden{
@@ -263,6 +274,7 @@ tbody{
 
 
 #uploader{
+    border-radius: var(--thick-rounded);
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
@@ -283,6 +295,11 @@ tbody{
     fill: var(--bs-white);
 }
 
+#editor{
+    margin-top: 2rem;
+    border-radius: var(--thick-rounded);
+    border-color: #222224;
+}
 .album{
     max-width: 320px;
     height: auto;
@@ -348,12 +365,18 @@ tbody{
     height: 3rem;
     background-color: var(--dark-bg-color);
     border-bottom: thin solid var(--border-color);
+    color: #ccc;
+    font-weight: 600;
 }
 
 .lyric-row.active{
     background-color: var(--main-alpha-color);
 }
 
+.time-col{
+    font-weight: 600;
+    color: white;
+}
 
 .lyric-col{
     overflow-x: hidden;
@@ -451,7 +474,11 @@ tbody{
 /* // No media query for `xs` since this is the default in Bootstrap */
 
 /* // Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) { }
+@media (min-width: 576px) {
+    .modal-sm{
+        min-width: 90%;
+    }
+ }
 
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {  }
@@ -464,6 +491,9 @@ tbody{
 
     .container-sm{
         max-width: 840px;
+    }
+    .modal-lg{
+        min-width: 65%;
     }
   }
 
