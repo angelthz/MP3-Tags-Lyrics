@@ -7,6 +7,7 @@
     --main-purple-color: #703bf7;
     --main-alpha-color: #7856d1ab;
     --main-hover-color: #8355f6;
+    --alt-main-alpha: #7856d130;
     --border-color: rgb(38, 38, 38);
     --opacity-color: #26262698;
     --font: "Urbanist", sans-serif;
@@ -187,6 +188,9 @@ tbody{
     background-color: #703bf761;
 }
 
+.bg-alt-alpha{
+    background-color: var(--alt-main-alpha);
+}
 .bg-gray-alpha{
     background-color: rgba(180, 180, 180, 0.176);
 }
@@ -224,9 +228,7 @@ tbody{
 }
 
 
-.top-8{
-    top: 8.6%;
-}
+
 
 .ignore-events{
     pointer-events: none;
@@ -309,9 +311,12 @@ tbody{
     right: 2%;
 }
 
+#lyrics-loader{
+    top: 7%;
+    height: 79%;
+}
+
 .table-lyric{
-    /* padding: 0 1.5rem; */
-    /* border-radius: var(--thin-rounded); */
 }
 
 .table-lyric>div:first-of-type{

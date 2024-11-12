@@ -18,7 +18,7 @@
 </head>
 
 <body>
-  <header class="bg-gray border-bottom" id="header" data-bs-theme="dark">
+  <header class="bg-gray border-bottom is-fixed" id="header" data-bs-theme="dark">
     <nav class="bg-gray container navbar navbar-expand-lg bg-body-tertiary">
       <div class="container">
         <a class="navbar-brand fs-2 fw-semibold" href="index.html">
@@ -65,24 +65,24 @@
             <small class="ms-2">Click here to upload your files or Drag and drop your files here.</small>
           </label>
           <div
-            class="visually-hidden bg-blur position-absolute start-0 top-0 end-0 bottom-0 d-flex justify-content-center align-items-center rounded upload-loader"
+            class="visually-hidden bg-alt-alpha position-absolute start-0 top-0 end-0 bottom-0 d-flex justify-content-center align-items-center rounded upload-loader"
             id="upload-loader">
-            <svg class="w-25 h-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-              <radialGradient id="a12" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)">
-                <stop offset="0" stop-color="#703BF7"></stop>
-                <stop offset=".3" stop-color="#703BF7" stop-opacity=".9"></stop>
-                <stop offset=".6" stop-color="#703BF7" stop-opacity=".6"></stop>
-                <stop offset=".8" stop-color="#703BF7" stop-opacity=".3"></stop>
-                <stop offset="1" stop-color="#703BF7" stop-opacity="0"></stop>
-              </radialGradient>
-              <circle transform-origin="center" fill="none" stroke="url(#a12)" stroke-width="15" stroke-linecap="round"
-                stroke-dasharray="200 1000" stroke-dashoffset="0" cx="100" cy="100" r="70">
-                <animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="2" values="360;0"
-                  keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite"></animateTransform>
-              </circle>
-              <circle transform-origin="center" fill="none" opacity=".2" stroke="#703BF7" stroke-width="15"
-                stroke-linecap="round" cx="100" cy="100" r="70"></circle>
-            </svg>
+            <svg width="48" height="48" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
+              <g fill="none" fill-rule="evenodd">
+                  <g transform="translate(1 1)" stroke-width="2">
+                      <circle stroke-opacity=".5" cx="18" cy="18" r="18"/>
+                      <path d="M36 18c0-9.94-8.06-18-18-18">
+                          <animateTransform
+                              attributeName="transform"
+                              type="rotate"
+                              from="0 18 18"
+                              to="360 18 18"
+                              dur="1s"
+                              repeatCount="indefinite"/>
+                      </path>
+                  </g>
+              </g>
+          </svg>
           </div>
         </form>
       </article>
@@ -157,24 +157,24 @@
             </small>
           <textarea class="fs-5 p-4 form-control" name="Lyrics" id="lyrics-textarea" placeholder="Lyrics"rows="10"></textarea>
           <div
-            class="visually-hidden bg-gray-alpha position-absolute start-0 top-8 end-0 bottom-0 d-flex justify-content-center align-items-center rounded"
+            class="visually-hidden bg-alt-alpha position-absolute start-0 end-0 bottom-0 d-flex justify-content-center align-items-center rounded"
             id="lyrics-loader">
-            <svg class="w-25 h-25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-              <radialGradient id="a12" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)">
-                <stop offset="0" stop-color="#703BF7"></stop>
-                <stop offset=".3" stop-color="#703BF7" stop-opacity=".9"></stop>
-                <stop offset=".6" stop-color="#703BF7" stop-opacity=".6"></stop>
-                <stop offset=".8" stop-color="#703BF7" stop-opacity=".3"></stop>
-                <stop offset="1" stop-color="#703BF7" stop-opacity="0"></stop>
-              </radialGradient>
-              <circle transform-origin="center" fill="none" stroke="url(#a12)" stroke-width="15" stroke-linecap="round"
-                stroke-dasharray="200 1000" stroke-dashoffset="0" cx="100" cy="100" r="70">
-                <animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="2" values="360;0"
-                  keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite"></animateTransform>
-              </circle>
-              <circle transform-origin="center" fill="none" opacity=".2" stroke="#703BF7" stroke-width="15"
-                stroke-linecap="round" cx="100" cy="100" r="70"></circle>
-            </svg>
+            <svg width="48" height="48" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
+              <g fill="none" fill-rule="evenodd">
+                  <g transform="translate(1 1)" stroke-width="2">
+                      <circle stroke-opacity=".5" cx="18" cy="18" r="18"/>
+                      <path d="M36 18c0-9.94-8.06-18-18-18">
+                          <animateTransform
+                              attributeName="transform"
+                              type="rotate"
+                              from="0 18 18"
+                              to="360 18 18"
+                              dur="1s"
+                              repeatCount="indefinite"/>
+                      </path>
+                  </g>
+              </g>
+          </svg>
           </div>
           <div class="position-relative mt-4">
             <button type="button" class="my-btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Launch Sync Tool</button>
@@ -253,7 +253,7 @@
         <button class="my-btn mx-auto d-block" id="btn-download">Save changes & Download</button>
       </article>
     </section>
-    <a class="my-btn d-flex justify-content-center align-items-center rounded-circle" href="#home" id="btn-top">
+    <a class="my-btn d-flex justify-content-center align-items-center rounded-circle is-fixed" href="#home" id="btn-top">
       <i class="bi bi-arrow-up text-white"></i>
     </a>
   </main>
