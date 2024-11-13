@@ -26,7 +26,7 @@ export function SyncLyrics(buffer,lyric){
     let lyricArray = lyric.split("\n").filter(line=> line!=="");
 
     lyricArray.forEach((lyricLine,idx)=> {
-        template.querySelector(".time-col").textContent = `[00:00:00]`;
+        template.querySelector(".time-col").textContent = `[00:00.00]`;
         template.querySelector(".lyric-col").textContent = `${lyricLine}`;
         template.querySelector(".remove-col").dataset.idx = `${idx}`;
         template.querySelector(".add-col").dataset.idx = `${idx}`;
@@ -41,6 +41,14 @@ export function SyncLyrics(buffer,lyric){
 
 export function ClearLyrics(){
     document.getElementById("lyric-table").innerHTML = "";
+}
+
+
+export function GetSyncLyrics(){
+    let lrc = "";
+    lyricsMap.forEach(value=>{if(value) lrc += `${value.timeStamp} ${value.lyric}\n`});
+    console.log(lrc)
+    return lrc;
 }
 
 export default (()=>{
@@ -88,8 +96,8 @@ export default (()=>{
         }
 
         if(e.target.matches(".add-col")){
-            let time = getTime(audio.currentTime);
-            let formatedTime = `[${time.mm}:${time.ss}:${time.cs}]`;
+            let time = getTime(audio.currentTime-0.3);
+            let formatedTime = `[${time.mm}:${time.ss}.${time.cs}]`;
             e.target.parentElement.classList.add("active");
             e.target.parentElement.querySelector(".time-col").textContent = formatedTime;
             lyricsMap.set(
@@ -104,6 +112,10 @@ export default (()=>{
             lyricsMap.set(e.target.dataset.idx,null);
             console.log("removed")
         }
+
+        
+
+        
     })
     
 })();

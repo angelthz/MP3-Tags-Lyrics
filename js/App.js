@@ -5,7 +5,7 @@ import Mp3TagReader from "./Mp3TagReader.js";
 import {goTopBtn} from "./Utilities.js"
 import { DEFAULT_ALBUM_IMG } from "./Assets.js";
 import { MP3_AUDIO } from "./MIME_Types.js";
-import SyncTool,{ClearLyrics, SyncLyrics} from "./SyncTool.js";
+import SyncTool,{ClearLyrics, GetSyncLyrics, SyncLyrics} from "./SyncTool.js";
 
 
 const uploaderContainer = document.getElementById("uploader-container");
@@ -90,19 +90,25 @@ document.addEventListener("submit", async e=> {
     });
     document.querySelector("#lyrics-loader").classList.toggle("visually-hidden");
     console.log(lyrics)
-    lyricsArea.textContent = lyrics ? (lyrics.syncedLyrics || lyrics.plainLyrics) : "Lyrics Not Found";
+    lyricsArea.value = lyrics ? (lyrics.syncedLyrics || lyrics.plainLyrics) : "Lyrics Not Found";
 })
 
 
 document.addEventListener("click", e=>{
-    if(!e.target.matches("#btn-download")) return false;
+    if(e.target.matches("#btn-download")){
     //save changes and download file
-    mp3Tags.setTitle(trackForm.song.value);
-    mp3Tags.setAlbum(trackForm.album.value);
-    mp3Tags.setArtist(trackForm.artist.value);
-    mp3Tags.setLyrics(lyricsArea.textContent);
-    console.log(mp3Tags);
-    downloader.downloadFile(mp3Tags.getAudioArray(), mp3Tags.getSongTitle(),".mp3", MP3_AUDIO);
+        mp3Tags.setTitle(trackForm.song.value);
+        mp3Tags.setAlbum(trackForm.album.value);
+        mp3Tags.setArtist(trackForm.artist.value);
+        mp3Tags.setLyrics(lyricsArea.value);
+        console.log(mp3Tags);
+        downloader.downloadFile(mp3Tags.getAudioArray(), mp3Tags.getSongTitle(),".mp3", MP3_AUDIO);
+    }
+    if(e.target.matches("#btn-close-modal")){
+        console.log("close modal");
+        lyricsArea.value = GetSyncLyrics();
+        console.log(GetSyncLyrics())
+    }
 })
 
 
