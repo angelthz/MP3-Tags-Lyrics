@@ -1,11 +1,11 @@
-import {downloader} from "./FileDownloader.js";
-import {asyncAudioReader} from "./AudioReader.js";
-import {asyncFetchLyrics} from "./FetchLyrics.js";
+import { downloader } from "./helpers/FileDownloader.js";
+import { asyncAudioReader } from "./helpers/AudioReader.js";
+import { asyncFetchLyrics } from "./helpers/FetchLyrics.js";
 import Mp3TagReader from "./Mp3TagReader.js";
-import {goTopBtn} from "./Utilities.js"
-import { DEFAULT_ALBUM_IMG } from "./Assets.js";
-import { MP3_AUDIO } from "./MIME_Types.js";
-import SyncTool,{ClearLyrics, GetSyncLyrics, SyncLyrics} from "./SyncTool.js";
+import { goTopBtn } from "./components/Utilities.js"
+import { DEFAULT_ALBUM_IMG } from "./consts/Assets.js";
+import { MP3_AUDIO } from "./consts/MIME_Types.js";
+import SyncTool, { intializeSyncTool } from "./SyncTool.js";
 
 
 const uploaderContainer = document.getElementById("uploader-container");
@@ -29,16 +29,16 @@ document.addEventListener("DOMContentLoaded", e => {
 });
 
 
-async function readAudioTags(file){
+async function readAudioTags(file) {
     location.hash = "";
     trackForm.reset();
     lyricsArea.textContent = "";
     document.getElementById("editor").classList.remove("visually-hidden");
-    try{
+    try {
         document.getElementById("upload-loader").classList.toggle("visually-hidden");
         buffer = await asyncAudioReader(file);
         mp3Tags = new Mp3TagReader(buffer);
-        buffer=null;
+        buffer = null;
         trackForm.song.value = mp3Tags.getSongTitle();
         trackForm.album.value = mp3Tags.getAlbum();
         trackForm.artist.value = mp3Tags.getArtist();
@@ -46,14 +46,14 @@ async function readAudioTags(file){
         console.log(mp3Tags)
         document.getElementById("upload-loader").classList.toggle("visually-hidden");
 
-    }catch(err){
+    } catch (err) {
         console.error(err)
     }
 }
 
 
 //change default input
-defaultInput.addEventListener("change", e=> {
+defaultInput.addEventListener("change", e => {
     e.preventDefault();
     console.log(e.target.files[0])
     readAudioTags(e.target.files[0]);
@@ -61,26 +61,26 @@ defaultInput.addEventListener("change", e=> {
 })
 
 //drag and drop input
-dragInput.addEventListener("dragover", e=> {
+dragInput.addEventListener("dragover", e => {
     e.preventDefault();
     uploaderContainer.classList.add("drag-over");
 })
 
-dragInput.addEventListener("dragleave", e=> {
+dragInput.addEventListener("dragleave", e => {
     e.preventDefault();
     uploaderContainer.classList.remove("drag-over");
 })
 
-dragInput.addEventListener("drop", e=> {
+dragInput.addEventListener("drop", e => {
     e.preventDefault();
     uploaderContainer.classList.remove("drag-over");
     readAudioTags(e.dataTransfer.files[0]);
     e.dataTransfer.files = null;
 })
 
-document.addEventListener("submit", async e=> {
+document.addEventListener("submit", async e => {
     e.preventDefault();
-    if(!e.target.matches("#track-form")) return false;
+    if (!e.target.matches("#track-form")) return false;
     //send a request to fetch lyrics
     document.querySelector("#lyrics-loader").classList.toggle("visually-hidden");
     lyrics = await asyncFetchLyrics({
@@ -94,31 +94,18 @@ document.addEventListener("submit", async e=> {
 })
 
 
-document.addEventListener("click", e=>{
-    if(e.target.matches("#btn-download")){
-    //save changes and download file
+document.addEventListener("click", e => {
+    if (e.target.matches("#btn-download")) {
+        //save changes and download file
         mp3Tags.setTitle(trackForm.song.value);
         mp3Tags.setAlbum(trackForm.album.value);
         mp3Tags.setArtist(trackForm.artist.value);
         mp3Tags.setLyrics(lyricsArea.value);
         console.log(mp3Tags);
-        downloader.downloadFile(mp3Tags.getAudioArray(), mp3Tags.getSongTitle(),".mp3", MP3_AUDIO);
+        downloader.downloadFile(mp3Tags.getAudioArray(), mp3Tags.getSongTitle(), ".mp3", MP3_AUDIO);
     }
-    if(e.target.matches("#btn-close-modal")){
-        console.log("close modal");
-        lyricsArea.value = GetSyncLyrics();
-        console.log(GetSyncLyrics())
+
+    if (e.target.matches("#btn-sync-tool")) {
+        intializeSyncTool(mp3Tags.getAudioArray(), lyricsArea.value);
     }
 })
-
-
-lyricsArea.addEventListener("change",e=>ClearLyrics());
-
-syncModal.addEventListener("show.bs.modal",e=>{
-    ClearLyrics();
-    SyncLyrics(mp3Tags.getAudioArray(),lyricsArea.value)
-});
-
-syncModal.addEventListener("hide.bs.modal",e=>{
-    
-});

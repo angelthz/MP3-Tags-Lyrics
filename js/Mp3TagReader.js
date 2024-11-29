@@ -1,5 +1,5 @@
-import {downloader} from "./FileDownloader.js"
-import { JPEG_IMG } from "./MIME_Types.js";
+import { downloader } from "./helpers/FileDownloader.js"
+import { JPEG_IMG } from "./consts/MIME_Types.js";
 
 export default class Mp3TagReader {
     constructor(buffer) {
@@ -31,7 +31,7 @@ export default class Mp3TagReader {
         return this.mp3Tag.tags.v2.USLT;
     }
 
-    
+
     getSimplifiedTags() {
         return {
             songTitle: this.getSongTitle(),
@@ -41,26 +41,26 @@ export default class Mp3TagReader {
         }
     }
 
-    getBasicTags(){
-        return{
+    getBasicTags() {
+        return {
             song: this.getSongTitle(),
             album: this.getAlbum(),
             artist: this.getArtist()
         }
     }
-    
+
     getCompleteTags() {
         return this.mp3Tag.tags.v2;
     }
 
-    getAlbumImage(){
-        if(!this.getCompleteTags().hasOwnProperty("APIC")) return null;
+    getAlbumImage() {
+        if (!this.getCompleteTags().hasOwnProperty("APIC")) return null;
         let imgUint8Array = new Uint8Array(this.getCompleteTags().APIC[0].data);
         return downloader.getUrl(imgUint8Array, JPEG_IMG);
     }
-    
+
     read() {
-        if(this.mp3Tag.error != "") throw new Error(this.mp3Tag.error);
+        if (this.mp3Tag.error != "") throw new Error(this.mp3Tag.error);
         this.mp3Tag.read();
     }
     //setters
@@ -79,20 +79,20 @@ export default class Mp3TagReader {
     setLyrics(text) {
         this.mp3Tag.tags.v2.USLT = [
             {
-                language : "DEF",
-                descriptor : "Lyric Me/LRCLIB",
-                text 
+                language: "DEF",
+                descriptor: "Lyric Me/LRCLIB",
+                text
             }
         ];
     }
 
     save() {
-        if(this.mp3Tag.error != "") throw new Error(this.mp3Tag.error);
+        if (this.mp3Tag.error != "") throw new Error(this.mp3Tag.error);
         console.log("saving file")
         this.mp3Tag.save();
     }
 
-    getAudioArray(){
+    getAudioArray() {
         this.save();
         return this.mp3Tag.buffer;
     }
