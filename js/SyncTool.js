@@ -77,7 +77,8 @@ function resumeButton(e = null) {
 
 function resetLyricTable() {
     document.querySelector(".modal-body").scrollTop = 0;
-    document.querySelectorAll(".lyric-row").forEach(el => el.classList.remove("active"));
+    document.getElementById("lyric-table").innerHTML = "";
+    // document.querySelectorAll(".lyric-row").forEach(el => el.classList.remove("active"));
 }
 
 export default (() => {
@@ -154,13 +155,18 @@ export default (() => {
                 e.target.textContent = "Run Test";
             }
         }
+        if(e.target.matches("#close-modal-icon")){
+            console.log("top modal closed")
+            resetLyricTable();
+            resetPlayer();
+        }
 
         //update textarea lyrics
         if (e.target.matches("#btn-close-modal")) {
+            console.log("modal closed")
             runningTest = false;
             resetLyricTable();
             resetPlayer();
-            // console.log(lyricsStorage)
             let lrc = "";
             lyricsStorage.forEach((lyric,idx)=>{
                 if(idx === lyricsStorage.length-1)
