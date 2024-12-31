@@ -15,21 +15,41 @@ let runningTest = false;
 
 export function intializeSyncTool(buffer, lyricString) {
     let lyricTable = document.getElementById("lyric-table");
-    // let lyrics = lyric.split("\n").filter(line => line !== "");
+    // let lyrics = lyricString.split("\n").filter(line => line !== "");
     let lyrics = lyricString.split("\n");
     let rows = "";
     lyricsStorage = [];
+
+    //fill the lyricsStorage with an object with lyric stats
     lyrics.forEach((lyricLine, idx) => {
         let lyric = lyricLine.match(LYRIC_RGX) ? lyricLine.match(LYRIC_RGX)[0] : lyricLine;
         let tms = lyricLine.match(TIME_STAPM_RGX) ? lyricLine.match(TIME_STAPM_RGX)[0] : `00:00.00`;
-        lyricsStorage.push({ idx, lyric, tms: Time.parse(tms) });
-        rows += LyricRow({ idx, lyric, tms });
-        console.log(tms)
+        let marked = TIME_STAPM_RGX.test(lyricLine);
+        lyricsStorage.push({ idx, lyric, tms: Time.parse(tms), marked });
+        // rows += LyricRow({ idx, lyric, tms });
     });
+    
+    //filter the lyricstorage to remove the last elements with blank spaces
+    while(lyricsStorage[lyricsStorage.length-1].lyric === ""){
+        // console.log("removed: ", lyricsStorage.pop() );
+        lyricsStorage.pop();
+    }
+    //then render the lyric rows
+    lyricsStorage.forEach(lyricRow => rows += LyricRow(lyricRow));
+    
     audio.src = downloader.getUrl(buffer);
     progress.value = 0;
     lyricTable.insertAdjacentHTML("afterbegin", rows);
-    console.log(lyricsStorage)
+    document.getElementById("btn-test-modal").disabled = !lyricsStorage.every(el => el.marked);
+
+    //clear the last elements in lyricstorage and rows elements if lyric textcontent is a blank space
+    //this method affects the performance, an alternative is fill the lyrics storage filter the last
+    //elements with blank spaces then render the lyric rows
+    // while(lyricsStorage[lyricsStorage.length-1].lyric === ""){
+    //     let toRemove = document.querySelector(`div[data-idx='${lyricsStorage.length-1}']`);
+    //     document.getElementById("lyric-table").removeChild(toRemove);
+    //     console.log("removed: ", lyricsStorage.pop() );
+    // }
 };
 
 
@@ -52,38 +72,59 @@ function runLyricTest() {
     }
 }
 
-function saveLyrics() {
-    let lrc = lyricsStorage.reduce((prev, curr) => prev + `${Time.format(curr.tms)} ${curr.lyric}\n`, "");
-}
-
-function resetPlayer() {
-    resumeButton()
-    audio.currentTime = 0;
-}
 
 function playButton(e = null) {
     document.querySelector(".play-btn").classList.add("visually-hidden");
     document.querySelector(".resume-btn").classList.remove("visually-hidden");
-    console.log("play");
     audio.play();
 }
 
 function resumeButton(e = null) {
     document.querySelector(".resume-btn").classList.add("visually-hidden");
     document.querySelector(".play-btn").classList.remove("visually-hidden");
-    console.log("resume");
     audio.pause();
+}
+
+function clearLyricTable() {
+    document.querySelector(".modal-body").scrollTop = 0;
+    document.getElementById("lyric-table").innerHTML = "";
 }
 
 function resetLyricTable() {
     document.querySelector(".modal-body").scrollTop = 0;
-    document.getElementById("lyric-table").innerHTML = "";
-    // document.querySelectorAll(".lyric-row").forEach(el => el.classList.remove("active"));
+    document.querySelectorAll(".lyric-row").forEach(el => el.classList.remove("active"));
+}
+
+function resetTest() {
+    runningTest = false;
+    document.getElementById("btn-test-modal").dataset.running = "false";
+    document.getElementById("btn-test-modal").textContent = "Run Test";
+}
+
+function resetPlayer() {
+    resumeButton()
+    audio.pause();
+    audio.currentTime = 0;
+}
+
+function modalClosed() {
+    resetTest();
+    resetPlayer();
+    clearLyricTable();
+}
+
+function saveLyrics() {
+    let lrc = "";
+    lyricsStorage.forEach((lyric, idx) => {
+        if (idx === lyricsStorage.length - 1)
+            lrc += `${Time.format(lyric.tms)} ${lyric.lyric}`;
+        else
+            lrc += `${Time.format(lyric.tms)} ${lyric.lyric}\n`;
+    })
+    document.querySelector("#lyrics-textarea").value = lrc;
 }
 
 export default (() => {
-    console.log("running Sync Setup");
-
     audio.addEventListener("loadedmetadata", e => {
         progress.setAttribute("max", audio.duration);
         duration.textContent = `${Time.parseMm(audio.duration)}:${Time.parseSs(audio.duration)}`;
@@ -92,7 +133,7 @@ export default (() => {
     audio.addEventListener("timeupdate", e => {
         current.textContent = `${Time.parseMm(audio.currentTime)}:${Time.parseSs(audio.currentTime)}`;
         progress.value = audio.currentTime;
-        console.log(Math.floor(audio.currentTime))
+
         if (runningTest)
             runLyricTest();
     });
@@ -111,15 +152,12 @@ export default (() => {
         }
 
         if (e.target.matches(".backward-btn")) {
-            console.log("backward")
             audio.currentTime = audio.currentTime - 5;
         }
 
         if (e.target.matches(".forward-btn")) {
-            console.log("forward")
             audio.currentTime = audio.currentTime + 5;
         }
-
 
         //add new timestamp
         if (e.target.matches(".add-col")) {
@@ -128,7 +166,8 @@ export default (() => {
             e.target.parentElement.classList.add("active");
             e.target.parentElement.querySelector(".time-col").textContent = Time.format(time);
             lyricsStorage[idx].tms = time;
-            console.log("added timestamp", lyricsStorage[idx])
+            lyricsStorage[idx].marked = true;
+            document.getElementById("btn-test-modal").disabled = !lyricsStorage.every(el => el.marked);
         }
 
         //reset selected row timestap to 0
@@ -136,7 +175,8 @@ export default (() => {
             let idx = Number.parseInt(e.target.dataset.idx);
             e.target.parentElement.classList.remove("active");
             lyricsStorage[idx].tms = 0;
-            console.log("removed timestamp")
+            lyricsStorage[idx].marked = false;
+            document.getElementById("btn-test-modal").disabled = !lyricsStorage.every(el => el.marked);
         }
         /* runs lyric test */
         if (e.target.matches("#btn-test-modal")) {
@@ -155,29 +195,14 @@ export default (() => {
                 e.target.textContent = "Run Test";
             }
         }
-        if(e.target.matches("#close-modal-icon")){
-            console.log("top modal closed")
-            resetLyricTable();
-            resetPlayer();
+        if (e.target.matches("#close-modal-icon")) {
+            modalClosed();
         }
 
         //update textarea lyrics
         if (e.target.matches("#btn-close-modal")) {
-            console.log("modal closed")
-            runningTest = false;
-            resetLyricTable();
-            resetPlayer();
-            let lrc = "";
-            lyricsStorage.forEach((lyric,idx)=>{
-                if(idx === lyricsStorage.length-1)
-                    lrc += `${Time.format(lyric.tms)} ${lyric.lyric}`;
-                else
-                    lrc += `${Time.format(lyric.tms)} ${lyric.lyric}\n`;
-            })
-            // document.querySelector("#lyrics-textarea").value = "";
-            // document.querySelector("#lyrics-textarea").value = lyricsStorage.reduce((prev, curr) => prev + `${Time.format(curr.tms)} ${curr.lyric}`, "");
-            document.querySelector("#lyrics-textarea").value = lrc;
-            // console.log(lrc)
+            saveLyrics();
+            modalClosed();
         }
     })
 

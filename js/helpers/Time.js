@@ -33,11 +33,11 @@ export class Time {
         return Number.parseFloat(Time.getCs(time)).toFixed(2).replace(/0+\./, "");
     }
 
-    //time general
+    //parse time formated in secs to mm:ss.cs
     static format(time) {
         return `[${Time.parseMm(time)}:${Time.parseSs(time)}.${Time.parseCs(time)}]`;
     }
-    //parse time format mm:ss.cs to seconds
+    //parse time formated in mm:ss.cs to seconds
     static parse(time) {
         let parsed = time.replaceAll(/[\[|\]]/g, "").split(/:|\./).map(el => Number.parseInt(el));
         return (parsed[0] * 60) + parsed[1] + (parsed[2] / 100);

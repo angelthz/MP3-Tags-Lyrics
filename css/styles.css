@@ -7,6 +7,7 @@
     --main-purple-color: #703bf7;
     --main-alpha-color: #7856d1ab;
     --main-hover-color: #8355f6;
+    /* --main-purple-disabled: hsl(257 92.2% 70%); */
     --alt-main-alpha: #7856d130;
     --border-color: #222224;
     --opacity-color: #26262698;
@@ -236,6 +237,14 @@ tbody {
     /* box-shadow: var(--shadow); */
 }
 
+.my-btn:disabled{
+    /* background-color: var(--main-purple-disabled); */
+    /* opacity: 0.5; */
+    filter: brightness(0.5);
+}
+.my-btn:disabled:hover{
+    background-color: var(--main-purple-color);
+}
 .hidden {
     display: none;
 }
