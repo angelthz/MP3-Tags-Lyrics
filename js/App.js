@@ -1,7 +1,7 @@
 import { downloader } from "./helpers/FileDownloader.js";
 import { asyncAudioReader } from "./helpers/AudioReader.js";
 import { asyncFetchLyrics } from "./helpers/FetchLyrics.js";
-import Mp3TagReader from "./Mp3TagReader.js";
+import Mp3TagReader from "./helpers/Mp3TagReader.js";
 import { goTopBtn } from "./components/Utilities.js"
 import { DEFAULT_ALBUM_IMG } from "./consts/Assets.js";
 import { MP3_AUDIO } from "./consts/MIME_Types.js";
@@ -51,10 +51,19 @@ async function readAudioTags(file) {
     }
 }
 
+//clear inputs
+const clearInputs = ()=>{
+    trackForm.song.value = "";
+    trackForm.album.value = "";
+    trackForm.artist.value = "";
+    lyricsArea.value = "";
+}
+
 
 //change default input
 defaultInput.addEventListener("change", e => {
     e.preventDefault();
+    clearInputs();
     console.log(e.target.files[0])
     readAudioTags(e.target.files[0]);
     e.target.files = null;
@@ -73,6 +82,7 @@ dragInput.addEventListener("dragleave", e => {
 
 dragInput.addEventListener("drop", e => {
     e.preventDefault();
+    clearInputs();
     uploaderContainer.classList.remove("drag-over");
     readAudioTags(e.dataTransfer.files[0]);
     e.dataTransfer.files = null;

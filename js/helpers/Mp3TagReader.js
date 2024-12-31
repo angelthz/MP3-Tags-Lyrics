@@ -1,5 +1,5 @@
-import { downloader } from "./helpers/FileDownloader.js"
-import { JPEG_IMG } from "./consts/MIME_Types.js";
+import { downloader } from "./FileDownloader.js"
+import { JPEG_IMG } from "../consts/MIME_Types.js";
 
 export default class Mp3TagReader {
     constructor(buffer) {

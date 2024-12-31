@@ -18,7 +18,7 @@ export function intializeSyncTool(buffer, lyricString) {
     // let lyrics = lyric.split("\n").filter(line => line !== "");
     let lyrics = lyricString.split("\n");
     let rows = "";
-
+    lyricsStorage = [];
     lyrics.forEach((lyricLine, idx) => {
         let lyric = lyricLine.match(LYRIC_RGX) ? lyricLine.match(LYRIC_RGX)[0] : lyricLine;
         let tms = lyricLine.match(TIME_STAPM_RGX) ? lyricLine.match(TIME_STAPM_RGX)[0] : `00:00.00`;
@@ -160,8 +160,18 @@ export default (() => {
             runningTest = false;
             resetLyricTable();
             resetPlayer();
-            console.log(lyricsStorage)
-            document.querySelector("#lyrics-textarea").value = lyricsStorage.reduce((prev, curr) => prev + `${Time.format(curr.tms)} ${curr.lyric}\n`, "");
+            // console.log(lyricsStorage)
+            let lrc = "";
+            lyricsStorage.forEach((lyric,idx)=>{
+                if(idx === lyricsStorage.length-1)
+                    lrc += `${Time.format(lyric.tms)} ${lyric.lyric}`;
+                else
+                    lrc += `${Time.format(lyric.tms)} ${lyric.lyric}\n`;
+            })
+            // document.querySelector("#lyrics-textarea").value = "";
+            // document.querySelector("#lyrics-textarea").value = lyricsStorage.reduce((prev, curr) => prev + `${Time.format(curr.tms)} ${curr.lyric}`, "");
+            document.querySelector("#lyrics-textarea").value = lrc;
+            // console.log(lrc)
         }
     })
 
