@@ -1,5 +1,5 @@
 export function goTopBtn(target){
-    console.log("Running goTopBtn");
+    // console.log("Running goTopBtn");
     const options = {
         rootMargin: "0px",
         threshold: 1.0,

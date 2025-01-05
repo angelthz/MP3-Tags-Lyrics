@@ -4,13 +4,12 @@ import { downloader } from "./FileDownloader.js";
 
 export class SimpleTags extends MP3Tag{
     constructor(buffer){
-        super(buffer, true);
+        super(buffer, false);
         if (this.error !== '') throw new Error(this.error);
         this.read();
     }
 
     getSimpleTags(){
-    //    console.log(this);
        return{
             artist : this.getArtist(),
             album : this.getAlbum(),

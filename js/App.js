@@ -1,6 +1,6 @@
 import { downloader } from "./helpers/FileDownloader.js";
 import { asyncFetchLyrics } from "./helpers/FetchLyrics.js";
-import { goTopBtn } from "./components/Utilities.js"
+import { goTopBtn } from "./helpers/Utilities.js"
 import { MP3_AUDIO } from "./consts/MIME_Types.js";
 import { intializeSyncTool } from "./SyncTool.js";
 import { SimpleTags } from "./helpers/SimpleTags.js";
@@ -37,7 +37,6 @@ const readMp3File = async (file) => {
 }
 
 const initUiComponets = (mp3) => {
-    console.log(mp3.getSimpleTags())
     document.getElementById("editor").classList.remove("visually-hidden");
     trackForm.song.value = mp3.getTitle();
     trackForm.album.value = mp3.getAlbum();
