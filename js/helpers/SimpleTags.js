@@ -10,8 +10,7 @@ export class SimpleTags extends MP3Tag{
     }
 
     getSimpleTags(){
-       console.log(this);
-
+    //    console.log(this);
        return{
             artist : this.getArtist(),
             album : this.getAlbum(),
