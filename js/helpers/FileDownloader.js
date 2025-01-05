@@ -6,7 +6,7 @@ class Download{
 
     getUrl(buffer, type){
         try{
-            this.blob = new Blob([buffer],{type});
+            this.blob = new Blob(buffer,{type});
             return URL.createObjectURL(this.blob);
         }
         catch(err){

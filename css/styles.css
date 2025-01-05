@@ -28,6 +28,10 @@ body {
     background-color: var(--dark-bg-color);
 }
 
+svg{
+    pointer-events: none !important;
+}
+
 :target {
     scroll-margin-top: 5rem;
 }
@@ -254,11 +258,12 @@ tbody {
     height: 90%;
 }
 
-
-
-
 .ignore-events {
     pointer-events: none;
+}
+
+.fill-white{
+    fill: white;
 }
 
 /*  my styles */
@@ -351,7 +356,6 @@ tbody {
     height: 79%;
 }
 
-.table-lyric {}
 
 .table-lyric>div:first-of-type {
     border-top-left-radius: var(--thin-rounded);

@@ -1,8 +1,8 @@
-export async function asyncFetchLyrics(songInfo){
+export async function asyncFetchLyrics(song, album, artist){
     try{
-        let songQuery = `track_name=${songInfo.song.replaceAll(" ","+")}`;
-        let albumQuery = `album_name=${songInfo.album.replaceAll(" ","+")}`; 
-        let artistQuery = `artist_name=${songInfo.artist.replaceAll(" ","+")}`;
+        let songQuery = `track_name=${song.replaceAll(" ","+")}`;
+        let albumQuery = `album_name=${album.replaceAll(" ","+")}`; 
+        let artistQuery = `artist_name=${artist.replaceAll(" ","+")}`;
         let endpoint = "https://lrclib.net/api/get?";
         let endpointRequest = `${endpoint}&${artistQuery}&${songQuery}&${albumQuery}`;
         let res = await fetch(endpointRequest);
@@ -14,4 +14,4 @@ export async function asyncFetchLyrics(songInfo){
         console.error(err);
         return null;
     }
-}
+} 

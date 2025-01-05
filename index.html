@@ -5,13 +5,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MP3 Lyrics</title>
-  <link rel="shortcut icon" href="https://angelthz.github.io/MP3-Tags-Lyrics/assets/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <script src="js/libs/mp3tag.min.js"></script>
   <link rel="stylesheet" href="css/styles.css">
   <meta name="description" content="Add Synced Lyrics to your MP3 Files">
@@ -22,7 +20,7 @@
     <nav class="bg-gray container navbar navbar-expand-lg bg-body-tertiary">
       <div class="container">
         <a class="navbar-brand fs-2 fw-semibold" href="index.html">
-          <img src="https://angelthz.github.io/MP3-Tags-Lyrics/assets/logo.png" alt="Logo">
+          <img src="assets/logo.png" alt="Logo" loading="lazy">
           <small>MP3 Tags & Lyrics</small>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -89,9 +87,9 @@
       <article class="py-2 text-center border-bottom editor-title">
         <h2>Editor</h2>
       </article>
-      <article class="px-5 editor-track-info">
+      <div class="px-5 editor-track-info">
         <figure class="album mx-auto my-4">
-          <img class="img-fluid rounded" src="assets/defaul-album.png" alt="Album Image" id="album-image">
+          <img class="img-fluid rounded" src="assets/default-album.png" alt="Album Image" id="album-image" loading="lazy">
         </figure>
         <div class="form-check form-switch d-flex justify-content-end">
           <input class="form-check-input me-2 order-1 " type="checkbox" role="switch" id="flexSwitchCheckDefault">
@@ -141,8 +139,8 @@
             </small>
           </div>
         </form>
-      </article>
-      <article class="px-5 mb-4 editor-track-lyrics" id="lyrics">
+      </div>
+      <div class="px-5 mb-4 editor-track-lyrics" id="lyrics">
         <div class="position-relative">
           <label class="form-label" for="Lyrics">Lyrics</label>
           <small class="position-absolute" style="right:2%; top:12%;" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -175,7 +173,7 @@
               id="btn-sync-tool" disabled>Launch Sync Tool</button>
           </div>
         </div>
-      </article>
+      </div>
       <div class="modal fade sync-modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-lg modal-dialog-scrollable mx-auto p-3">
@@ -185,88 +183,67 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal-icon"></button>
             </div>
             <div class="player-container w-100 bg-gray  mx-auto">
-              <audio class="d-block mx-auto song visually-hidden" src="" preload="auto" id="song-player"></audio>
+              <!-- <audio class="d-block mx-auto song visually-hidden" src="" preload="auto" id="song-player"></audio> -->
               <div class="mx-auto player-bar w-100">
                 <div class="progress-bar">
-                  <input type="range" class="progress-audio d-block w-75 my-2 mx-auto">
+                  <input type="range" class="progress-audio d-block w-75 my-2 mx-auto" min="0" value="0">
                 </div>
                 <div class="mx-auto w-75 d-flex justify-content-between">
                   <small class="current">00:00</small>
                   <small class="duration">00:00</small>
                 </div>
                 <div class="controls-bar d-flex justify-content-center">
-                  <div class="time-control control m-2">
-                    <svg class="backward-btn" width="54" height="32" viewBox="0 0 54 32" fill="none"
+                  <button class="time-control control m-2" id="backward-btn">
+                    <svg class="" width="54" height="32" viewBox="0 0 54 32" fill="none"
                       xmlns="http://www.w3.org/2000/svg">
-                      <path class="ignore-events"
+                      <path 
                         d="M24.5852 13.8732C26.3035 12.632 28.5513 11.0475 29.6179 10.4463C31.3944 9.44554 34.4005 7.71755 36.2778 6.73233C38.1551 5.74906 40.0189 4.80845 41.8633 3.91245C44.5803 2.5896 47.3286 1.33186 50.1057 0.140333C51.1219 -0.294091 52.3088 0.328454 52.4019 1.34276C52.655 4.12811 52.8303 6.91999 52.9275 9.71512C53.064 13.5811 53.064 17.4506 52.9275 21.3166C52.8247 24.2102 52.6482 27.0087 52.4039 29.687C52.3088 30.7032 51.1239 31.3258 50.1076 30.8894C47.3292 29.6986 44.5797 28.4415 41.8613 27.1192C40.0189 26.2232 38.1551 25.2826 36.2759 24.2994C34.4005 23.3141 31.3227 21.5396 29.5462 20.5369C28.4853 19.9396 26.2802 18.3842 24.5852 17.1624H22V13.8732H24.5852Z" />
-                      <path class="ignore-events"
+                      <path
                         d="M2.5852 0.000696779V13.8732C4.30351 12.632 6.55126 11.0475 7.61793 10.4463C9.39441 9.44554 12.4005 7.71755 14.2778 6.73233C16.1551 5.74906 18.0189 4.80845 19.8633 3.91245C22.5803 2.5896 25.3286 1.33186 28.1057 0.140333C29.1219 -0.294091 30.3088 0.328454 30.4019 1.34276C30.655 4.12811 30.8303 6.91999 30.9275 9.71512C31.064 13.5811 31.064 17.4506 30.9275 21.3166C30.8247 24.2102 30.6482 27.0087 30.4039 29.687C30.3088 30.7032 29.1239 31.3258 28.1076 30.8894C25.3292 29.6986 22.5797 28.4415 19.8613 27.1192C18.0189 26.2232 16.1551 25.2826 14.2759 24.2994C12.4005 23.3142 9.32266 21.5396 7.54617 20.5369C6.48532 19.9396 4.28023 18.3842 2.5852 17.1624V31.031H-9.53674e-06V0.000696779H2.5852Z" />
                     </svg>
-                  </div>
-                  <div class="control m-2">
-                    <svg class="play-btn" viewBox="0 0 24 24">
-                      <path class="ignore-events"
+                  </button>
+                  <button class="control m-2" id="play-btn">
+                    <svg class="play-icon" viewBox="0 0 24 24">
+                      <path
                         d="M16.04 9.009a93.31 93.31 0 0 0-5.18-2.992 85.246 85.246 0 0 0-3.861-1.945.756.756 0 0 0-1.075.62 85.122 85.122 0 0 0-.246 4.317 92.993 92.993 0 0 0 0 5.982c.048 1.492.131 2.935.246 4.316.043.524.6.845 1.074.62a85.293 85.293 0 0 0 3.861-1.944 93.24 93.24 0 0 0 5.181-2.992 85.086 85.086 0 0 0 3.652-2.396.725.725 0 0 0 0-1.19A84.99 84.99 0 0 0 16.04 9.01Z">
                       </path>
                     </svg>
-                    <svg class="resume-btn visually-hidden" viewBox="0 0 24 24">
-                      <path class="ignore-events"
+                    <svg class="resume-icon visually-hidden" viewBox="0 0 24 24">
+                      <path
                         d="M5.001 11.58c.02-2.585.249-4.847.55-6.753A.97.97 0 0 1 6.503 4H11v16H6.521a.968.968 0 0 1-.95-.823A45.403 45.403 0 0 1 5 11.579ZM17.48 4c.468 0 .873.344.95.823a45.4 45.4 0 0 1 .57 7.598 45.347 45.347 0 0 1-.55 6.752.97.97 0 0 1-.951.827H13V4h4.479Z"
                         clip-rule="evenodd"></path>
                     </svg>
-                  </div>
-                  <div class="time-control control m-2">
-                    <svg class="forward-btn" width="54" height="32" viewBox="0 0 54 32" fill="none"
+                  </button>
+                  <button class="time-control control m-2" id="forward-btn">
+                    <svg  width="54" height="32" viewBox="0 0 54 32" fill="none"
                       xmlns="http://www.w3.org/2000/svg">
-                      <path class="ignore-events"
+                      <path
                         d="M28.4446 13.8732C26.7263 12.632 24.4786 11.0475 23.4119 10.4463C21.6354 9.44554 18.6294 7.71755 16.752 6.73233C14.8747 5.74906 13.0109 4.80845 11.1666 3.91245C8.44955 2.5896 5.70129 1.33186 2.92416 0.140333C1.90792 -0.294091 0.721009 0.328454 0.627918 1.34276C0.374854 4.12811 0.199594 6.91999 0.102342 9.71512C-0.034114 13.5811 -0.034114 17.4506 0.102342 21.3166C0.20513 24.2102 0.381615 27.0087 0.625978 29.687C0.721009 30.7032 1.90598 31.3258 2.92222 30.8894C5.70064 29.6986 8.45019 28.4415 11.1685 27.1192C13.0109 26.2232 14.8747 25.2826 16.754 24.2994C18.6294 23.3141 21.7072 21.5396 23.4837 20.5369C24.5445 19.9396 26.7496 18.3842 28.4446 17.1624H31.0299V13.8732H28.4446Z" />
-                      <path class="ignore-events"
+                      <path
                         d="M50.4446 0.000696779V13.8732C48.7263 12.632 46.4786 11.0475 45.4119 10.4463C43.6354 9.44554 40.6294 7.71755 38.752 6.73233C36.8747 5.74906 35.0109 4.80845 33.1666 3.91245C30.4496 2.5896 27.7013 1.33186 24.9242 0.140333C23.9079 -0.294091 22.721 0.328454 22.6279 1.34276C22.3749 4.12811 22.1996 6.91999 22.1023 9.71512C21.9659 13.5811 21.9659 17.4506 22.1023 21.3166C22.2051 24.2102 22.3816 27.0087 22.626 29.687C22.721 30.7032 23.906 31.3258 24.9222 30.8894C27.7006 29.6986 30.4502 28.4415 33.1685 27.1192C35.0109 26.2232 36.8747 25.2826 38.754 24.2994C40.6294 23.3142 43.7072 21.5396 45.4837 20.5369C46.5445 19.9396 48.7496 18.3842 50.4446 17.1624V31.031H53.0299V0.000696779H50.4446Z" />
                     </svg>
-                  </div>
+                  </button>
                 </div>
               </div>
             </div>
             <div class="modal-body">
               <div class="table-lyric border rounded" id="lyric-table"></div>
-              <template id="lyric-row-template" class="lyric-row-template">
-                <div class="lyric-row row fs-6 align-items-center">
-                  <span class="time-col col-2 text-center">[00:00:00]</span>
-                  <span class="lyric-col col-8 ">I know I belong here on earth I know I belong here on earth I know I
-                    belong here on earthI know I belong here on earth</span>
-                  <div class="remove-col btn-col col-1 h-100 d-flex justify-content-center align-items-center">
-                    <svg class="ignore-events" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
-                      width="24px" fill="#5f6368">
-                      <path d="M200-440v-80h560v80H200Z" />
-                    </svg>
-                  </div>
-                  <div class="add-col btn-col col-1 h-100  d-flex justify-content-center align-items-center">
-                    <svg class="ignore-events d-block mx-auto" xmlns="http://www.w3.org/2000/svg" height="24px"
-                      viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-                      <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
-                    </svg>
-                  </div>
-                </div>
-              </template>
             </div>
             <div class="modal-footer">
               <!-- <button type="button" class="my-btn btn-primary save-modal-btn">Save & Close</button> -->
-              <button type="button" class="my-btn btn-secondary" id="btn-test-modal" data-running="false" disabled>Run
-                Test</button>
+              <button type="button" class="my-btn btn-secondary" id="btn-test-modal" data-running="false" disabled>Test Lyrics</button>
               <button type="button" class="my-btn btn-primary close-modal-btn" data-bs-dismiss="modal"
                 id="btn-close-modal">Save &Close</button>
             </div>
           </div>
         </div>
       </div>
-      <article class="py-3 border-top editor-track-download">
+      <div class="py-3 border-top editor-track-download">
         <button class="my-btn mx-auto d-block" id="btn-download">Save changes & Download</button>
-      </article>
+      </div>
     </section>
-    <a class="my-btn d-flex justify-content-center align-items-center rounded-circle is-fixed" href="#home"
-      id="btn-top">
-      <i class="bi bi-arrow-up text-white"></i>
+    <a class="my-btn d-flex justify-content-center align-items-center rounded-circle is-fixed" href="#home" id="btn-top">
+      <svg class="fill-white" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z"/></svg>
     </a>
   </main>
   <footer class="bg-gray border-top text-white py-1" id="footer">

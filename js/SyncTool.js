@@ -4,57 +4,21 @@ import { LyricRow } from "./components/LyricRow.js";
 import { LYRIC_RGX, TIME_STAPM_RGX } from "./consts/RegexExp.js";
 import { Queue } from "./helpers/Queue.js";
 
-const audio = document.getElementById("song-player");
-const current = document.querySelector(".current");
-const duration = document.querySelector(".duration");
-const progress = document.querySelector(".progress-audio");
-let lyricsStorage = []
+const currentEl = document.querySelector(".current");
+const durationEl = document.querySelector(".duration");
+const progressEl = document.querySelector(".progress-audio");
+const lyricsStorage = []
 const lyricQueue = Queue();
+//player elements
+const playBtn  = document.getElementById("play-btn");
+const backwardBtn  = document.getElementById("backward-btn");
+const forwardBtn  = document.getElementById("forward-btn");
 let runningTest = false;
-
-
-export function intializeSyncTool(buffer, lyricString) {
-    let lyricTable = document.getElementById("lyric-table");
-    // let lyrics = lyricString.split("\n").filter(line => line !== "");
-    let lyrics = lyricString.split("\n");
-    let rows = "";
-    lyricsStorage = [];
-
-    //fill the lyricsStorage with an object with lyric stats
-    lyrics.forEach((lyricLine, idx) => {
-        let lyric = lyricLine.match(LYRIC_RGX) ? lyricLine.match(LYRIC_RGX)[0] : lyricLine;
-        let tms = lyricLine.match(TIME_STAPM_RGX) ? lyricLine.match(TIME_STAPM_RGX)[0] : `00:00.00`;
-        let marked = TIME_STAPM_RGX.test(lyricLine);
-        lyricsStorage.push({ idx, lyric, tms: Time.parse(tms), marked });
-        // rows += LyricRow({ idx, lyric, tms });
-    });
-    
-    //filter the lyricstorage to remove the last elements with blank spaces
-    while(lyricsStorage[lyricsStorage.length-1].lyric === ""){
-        // console.log("removed: ", lyricsStorage.pop() );
-        lyricsStorage.pop();
-    }
-    //then render the lyric rows
-    lyricsStorage.forEach(lyricRow => rows += LyricRow(lyricRow));
-    
-    audio.src = downloader.getUrl(buffer);
-    progress.value = 0;
-    lyricTable.insertAdjacentHTML("afterbegin", rows);
-    document.getElementById("btn-test-modal").disabled = !lyricsStorage.every(el => el.marked);
-
-    //clear the last elements in lyricstorage and rows elements if lyric textcontent is a blank space
-    //this method affects the performance, an alternative is fill the lyrics storage filter the last
-    //elements with blank spaces then render the lyric rows
-    // while(lyricsStorage[lyricsStorage.length-1].lyric === ""){
-    //     let toRemove = document.querySelector(`div[data-idx='${lyricsStorage.length-1}']`);
-    //     document.getElementById("lyric-table").removeChild(toRemove);
-    //     console.log("removed: ", lyricsStorage.pop() );
-    // }
-};
-
+//
+const track = new Audio();
 
 function runLyricTest() {
-    let current = audio.currentTime;
+    let current = track.currentTime;
     let query = lyricsStorage.find(el => current >= (el.tms - 0.2) && current <= (el.tms + 0.2));
     if (query) {
         if (!lyricQueue.isEmpty()) {
@@ -72,17 +36,18 @@ function runLyricTest() {
     }
 }
 
+function resetPlayButton(){
 
-function playButton(e = null) {
-    document.querySelector(".play-btn").classList.add("visually-hidden");
-    document.querySelector(".resume-btn").classList.remove("visually-hidden");
-    audio.play();
 }
 
-function resumeButton(e = null) {
-    document.querySelector(".resume-btn").classList.add("visually-hidden");
-    document.querySelector(".play-btn").classList.remove("visually-hidden");
-    audio.pause();
+function playButton() {
+    playBtn.firstElementChild.classList.toggle("visually-hidden");
+    playBtn.lastElementChild.classList.toggle("visually-hidden");
+    
+    if(track.paused)
+        track.play();
+    else
+        track.pause();
 }
 
 function clearLyricTable() {
@@ -102,9 +67,11 @@ function resetTest() {
 }
 
 function resetPlayer() {
-    resumeButton()
-    audio.pause();
-    audio.currentTime = 0;
+    // resumeButton()
+    track.pause();
+    track.currentTime = 0;
+    playBtn.firstElementChild.classList.remove("visually-hidden");
+    playBtn.lastElementChild.classList.add("visually-hidden");
 }
 
 function modalClosed() {
@@ -125,43 +92,34 @@ function saveLyrics() {
 }
 
 export default (() => {
-    audio.addEventListener("loadedmetadata", e => {
-        progress.setAttribute("max", audio.duration);
-        duration.textContent = `${Time.parseMm(audio.duration)}:${Time.parseSs(audio.duration)}`;
+    track.addEventListener("loadedmetadata", e => {
+        progressEl.setAttribute("max", track.duration);
+        durationEl.textContent = `${Time.parseMm(track.duration)}:${Time.parseSs(track.duration)}`;
     });
 
-    audio.addEventListener("timeupdate", e => {
-        current.textContent = `${Time.parseMm(audio.currentTime)}:${Time.parseSs(audio.currentTime)}`;
-        progress.value = audio.currentTime;
+    track.addEventListener("timeupdate", e => {
+        currentEl.textContent = `${Time.parseMm(track.currentTime)}:${Time.parseSs(track.currentTime)}`;
+        progressEl.value = track.currentTime;
 
         if (runningTest)
             runLyricTest();
     });
 
-    progress.addEventListener("input", e => {
-        audio.currentTime = e.target.value;
+    progressEl.addEventListener("input", e => {
+        track.currentTime = e.target.value;
     })
+    
+    playBtn.addEventListener("click", playButton)
+
+    backwardBtn.addEventListener("click", () => track.currentTime = track.currentTime - 5);
+
+    forwardBtn.addEventListener("click", () => track.currentTime = track.currentTime + 5);
 
     document.addEventListener("click", e => {
-        if (e.target.matches(".play-btn")) {
-            playButton(e);
-        }
 
-        if (e.target.matches(".resume-btn")) {
-            resumeButton(e);
-        }
-
-        if (e.target.matches(".backward-btn")) {
-            audio.currentTime = audio.currentTime - 5;
-        }
-
-        if (e.target.matches(".forward-btn")) {
-            audio.currentTime = audio.currentTime + 5;
-        }
-
-        //add new timestamp
+        //add new timestamp to the current row and saves it in lyricstorage
         if (e.target.matches(".add-col")) {
-            let time = audio.currentTime;
+            let time = track.currentTime;
             let idx = Number.parseInt(e.target.dataset.idx);
             e.target.parentElement.classList.add("active");
             e.target.parentElement.querySelector(".time-col").textContent = Time.format(time);
@@ -184,15 +142,16 @@ export default (() => {
                 runningTest = true;
                 resetLyricTable();
                 resetPlayer();
-                playButton(e);
+                playButton();
                 e.target.dataset.running = "true";
                 e.target.textContent = "Stop Test";
             }
             else {
                 runningTest = false;
-                resumeButton(e);
+                resetLyricTable();
+                resetPlayer();
                 e.target.dataset.running = "false";
-                e.target.textContent = "Run Test";
+                e.target.textContent = "Test Lyrics";
             }
         }
         if (e.target.matches("#close-modal-icon")) {
@@ -209,4 +168,37 @@ export default (() => {
 })();
 
 
+export function intializeSyncTool(buffer, lyricString) {
+    //element to append new rows
+    let lyricTable = document.getElementById("lyric-table");
+    //split the lyricString into array
+    let lyrics = lyricString.split("\n");
+    //save the rows html content
+    let rows = "";
 
+    //reset the lyricsStorage
+    while(lyricsStorage.length>0){lyricsStorage.pop()}
+
+    //fill the lyricsStorage with an object with lyric stats
+    lyrics.forEach((lyricLine, idx) => {
+        let lyric = lyricLine.match(LYRIC_RGX) ? lyricLine.match(LYRIC_RGX)[0] : lyricLine;
+        let tms = lyricLine.match(TIME_STAPM_RGX) ? lyricLine.match(TIME_STAPM_RGX)[0] : `00:00.00`;
+        let marked = TIME_STAPM_RGX.test(lyricLine);
+        lyricsStorage.push({ idx, lyric, tms: Time.parse(tms), marked });
+    });
+    
+    //filter the lyricstorage to remove the last elements if lyric prop is a blank spaces
+    while(lyricsStorage[lyricsStorage.length-1].lyric === ""){
+        // console.log("removed: ", lyricsStorage.pop() );
+        lyricsStorage.pop();
+    }
+    //then render the lyric rows
+    lyricsStorage.forEach(lyricRow => rows += LyricRow(lyricRow));
+    
+    //set the buufer as track src
+    track.src = downloader.getUrl(buffer);
+    track.currentTime = 0;
+    lyricTable.insertAdjacentHTML("afterbegin", rows);
+    //if rows has not a timestamp block user to run test
+    document.getElementById("btn-test-modal").disabled = !lyricsStorage.every(el => el.marked);
+};
