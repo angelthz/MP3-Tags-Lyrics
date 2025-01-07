@@ -185,14 +185,14 @@
             <div class="player-container w-100 bg-gray  mx-auto">
               <!-- <audio class="d-block mx-auto song visually-hidden" src="" preload="auto" id="song-player"></audio> -->
               <div class="mx-auto player-bar w-100">
-                <div class="progress-bar">
-                  <input type="range" class="progress-audio d-block w-75 my-2 mx-auto" min="0" value="0">
+                <div class="progress-container w-75 mx-auto mt-4">
+                  <input type="range" class="progress-audio d-block" min="0" max="100" value="0">
                 </div>
-                <div class="mx-auto w-75 d-flex justify-content-between">
+                <div class="time-container mx-auto w-75 d-flex justify-content-between mt-3">
                   <small class="current">00:00</small>
                   <small class="duration">00:00</small>
                 </div>
-                <div class="controls-bar d-flex justify-content-center">
+                <div class="controls-container controls-bar d-flex justify-content-center">
                   <button class="time-control control m-2" id="backward-btn">
                     <svg class="" width="54" height="32" viewBox="0 0 54 32" fill="none"
                       xmlns="http://www.w3.org/2000/svg">

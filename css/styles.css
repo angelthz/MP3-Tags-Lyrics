@@ -8,6 +8,14 @@
     --main-alpha-color: #7856d1ab;
     --main-hover-color: #8355f6;
     /* --main-purple-disabled: hsl(257 92.2% 70%); */
+
+    /* range */
+    --range-color: hsl(257, 93%, 70%);
+    --range-bg: #ccc;
+    --range-hover: rgba(148, 108, 249,0.2);
+    --range-active: rgba(148, 108, 249,0.4);
+    
+    /* range */
     --alt-main-alpha: #7856d130;
     --border-color: #222224;
     --opacity-color: #26262698;
@@ -174,10 +182,11 @@ tbody {
     /* background-color: red; */
 }
 
-.lyric-col p {
-    white-space: text-wrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.lyric-col{
+    /* margin: 0; */
+    /* white-space: text-wrap; */
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
 }
 
 .list-group-item {
@@ -400,8 +409,11 @@ tbody {
 }
 
 .lyric-col {
+    /* font-size: 0.8rem !important; */
+    margin: 0;
+    /* padding: 0.2rem 0; */
     overflow-x: hidden;
-    text-wrap: nowrap;
+    /* text-wrap: nowrap; */
     text-overflow: ellipsis;
 }
 
@@ -430,12 +442,66 @@ tbody {
 
 
 input[type="range"] {
-    accent-color: var(--main-purple-color);
+    /* removing default appearance */
+    -webkit-appearance: none;
+    appearance: none; 
+    /* creating a custom design */
     width: 100%;
-    height: 1.5rem;
-    padding: 0;
-}
-
+    cursor: pointer;
+    outline: none;
+    /* border-radius: 15px; */
+    /*  overflow: hidden;  remove this line*/
+    
+    /* New additions */
+    height: 3px;
+    /* background: var(--range-bg); */
+    background-color: var(--range-bg);
+  }
+  
+  
+  /* Thumb: webkit */
+  input[type="range"]::-webkit-slider-thumb {
+    /* removing default appearance */
+    -webkit-appearance: none;
+    appearance: none; 
+    /* creating a custom design */
+    height: 16px;
+    width: 16px;
+    background-color: var(--range-color);
+    border-radius: 50%;
+    border: none;  
+    transition: .2s ease-in-out;
+  }
+  
+  /* Thumb: Firefox */
+  input[type="range"]::-moz-range-thumb {
+    height: 14px;
+    width: 14px;
+    background-color: var(--range-color);
+    border-radius: 50%;
+    border: none;
+    transition: .2s ease-in-out;
+  }
+  
+  /* Hover, active & focus Thumb: Webkit */
+  
+  input[type="range"]::-webkit-slider-thumb:hover {
+    box-shadow: 0 0 0 6px var(--range-hover);
+  }
+  input[type="range"]:active::-webkit-slider-thumb {
+    box-shadow: 0 0 0 8px var(--range-active);
+  }
+  
+  
+  /* Hover, active & focus Thumb: Firfox */
+  
+  input[type="range"]::-moz-range-thumb:hover {
+    box-shadow: 0 0 0 6px var(--range-hover);
+  }
+  input[type="range"]:active::-moz-range-thumb {
+    box-shadow: 0 0 0 8px var(--range-active);
+  }
+  
 
 .control {
     padding: 0;
@@ -481,6 +547,7 @@ input[type="range"] {
 .time-control:hover {
     background-color: #3a393d;
 }
+
 
 /* .control > svg:hover{
     fill: var(--main-purple-color);

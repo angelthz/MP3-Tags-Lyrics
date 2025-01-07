@@ -93,13 +93,17 @@ function saveLyrics() {
 
 export default (() => {
     track.addEventListener("loadedmetadata", e => {
-        progressEl.setAttribute("max", track.duration);
+        // progressEl.setAttribute("max", track.duration);
+        progressEl.max = Math.round(track.duration);
         durationEl.textContent = `${Time.parseMm(track.duration)}:${Time.parseSs(track.duration)}`;
     });
 
     track.addEventListener("timeupdate", e => {
+        let progressPercent = Math.round((track.currentTime * 100) / track.duration);
+        // console.log(Math.round(progressPercent))
         currentEl.textContent = `${Time.parseMm(track.currentTime)}:${Time.parseSs(track.currentTime)}`;
         progressEl.value = track.currentTime;
+        progressEl.style.background = `linear-gradient(to right, hsl(257 92.4% 62%) ${progressPercent}%, #ccc ${progressPercent}%)`;
 
         if (runningTest)
             runLyricTest();
@@ -107,6 +111,7 @@ export default (() => {
 
     progressEl.addEventListener("input", e => {
         track.currentTime = e.target.value;
+        // console.log(progressEl.value)
     })
     
     playBtn.addEventListener("click", playButton)
