@@ -11,6 +11,7 @@ const lyricsStorage = []
 const lyricQueue = Queue();
 //player elements
 const playBtn  = document.getElementById("play-btn");
+const resumeBtn = document.getElementById("resume-btn");
 const backwardBtn  = document.getElementById("backward-btn");
 const forwardBtn  = document.getElementById("forward-btn");
 let runningTest = false;
@@ -36,18 +37,20 @@ function runLyricTest() {
     }
 }
 
-function resetPlayButton(){
-
+function playButton() {
+    playBtn.classList.add("visually-hidden");
+    resumeBtn.classList.remove("visually-hidden");
+    track.play();
 }
 
-function playButton() {
-    playBtn.firstElementChild.classList.toggle("visually-hidden");
-    playBtn.lastElementChild.classList.toggle("visually-hidden");
-    
-    if(track.paused)
-        track.play();
-    else
-        track.pause();
+function resumeButton(){
+    resetPlayButton();
+    track.pause();
+}
+
+function resetPlayButton(){
+    playBtn.classList.remove("visually-hidden");
+    resumeBtn.classList.add("visually-hidden");
 }
 
 function clearLyricTable() {
@@ -67,11 +70,8 @@ function resetTest() {
 }
 
 function resetPlayer() {
-    // resumeButton()
-    track.pause();
+    resumeButton();
     track.currentTime = 0;
-    playBtn.firstElementChild.classList.remove("visually-hidden");
-    playBtn.lastElementChild.classList.add("visually-hidden");
 }
 
 function modalClosed() {
@@ -93,28 +93,28 @@ function saveLyrics() {
 
 export default (() => {
     track.addEventListener("loadedmetadata", e => {
-        // progressEl.setAttribute("max", track.duration);
         progressEl.max = Math.round(track.duration);
         durationEl.textContent = `${Time.parseMm(track.duration)}:${Time.parseSs(track.duration)}`;
     });
 
     track.addEventListener("timeupdate", e => {
-        let progressPercent = Math.round((track.currentTime * 100) / track.duration);
-        // console.log(Math.round(progressPercent))
-        currentEl.textContent = `${Time.parseMm(track.currentTime)}:${Time.parseSs(track.currentTime)}`;
         progressEl.value = track.currentTime;
-        progressEl.style.background = `linear-gradient(to right, hsl(257 92.4% 62%) ${progressPercent}%, #ccc ${progressPercent}%)`;
-
+        let progressPercent = ( (progressEl.value * 100 ) / progressEl.max );
+        currentEl.textContent = `${Time.parseMm(track.currentTime)}:${Time.parseSs(track.currentTime)}`;
+        progressEl.style.background = `linear-gradient(to right, var(--range-color) ${progressPercent}%, var(--range-bg) ${progressPercent}%)`;
         if (runningTest)
             runLyricTest();
     });
 
+    track.addEventListener("ended", resetPlayButton);
+
     progressEl.addEventListener("input", e => {
         track.currentTime = e.target.value;
-        // console.log(progressEl.value)
     })
     
-    playBtn.addEventListener("click", playButton)
+    playBtn.addEventListener("click", playButton);
+
+    resumeBtn.addEventListener("click", resumeButton);
 
     backwardBtn.addEventListener("click", () => track.currentTime = track.currentTime - 5);
 

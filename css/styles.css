@@ -12,9 +12,9 @@
     /* range */
     --range-color: hsl(257, 93%, 70%);
     --range-bg: #ccc;
-    --range-hover: rgba(148, 108, 249,0.2);
-    --range-active: rgba(148, 108, 249,0.4);
-    
+    --range-hover: rgba(148, 108, 249, 0.2);
+    --range-active: rgba(148, 108, 249, 0.4);
+
     /* range */
     --alt-main-alpha: #7856d130;
     --border-color: #222224;
@@ -36,7 +36,7 @@ body {
     background-color: var(--dark-bg-color);
 }
 
-svg{
+svg {
     pointer-events: none !important;
 }
 
@@ -182,7 +182,7 @@ tbody {
     /* background-color: red; */
 }
 
-.lyric-col{
+.lyric-col {
     /* margin: 0; */
     /* white-space: text-wrap; */
     /* overflow: hidden; */
@@ -250,14 +250,16 @@ tbody {
     /* box-shadow: var(--shadow); */
 }
 
-.my-btn:disabled{
+.my-btn:disabled {
     /* background-color: var(--main-purple-disabled); */
     /* opacity: 0.5; */
     filter: brightness(0.5);
 }
-.my-btn:disabled:hover{
+
+.my-btn:disabled:hover {
     background-color: var(--main-purple-color);
 }
+
 .hidden {
     display: none;
 }
@@ -271,7 +273,7 @@ tbody {
     pointer-events: none;
 }
 
-.fill-white{
+.fill-white {
     fill: white;
 }
 
@@ -440,73 +442,84 @@ tbody {
     background: #c2c9d2;
 }
 
+/**************************** input[type="range"] styles **************************************/
+
+.progress-container {
+    width: 75%;
+    margin: 0 auto;
+    padding: 0;
+}
 
 input[type="range"] {
     /* removing default appearance */
     -webkit-appearance: none;
-    appearance: none; 
-    /* creating a custom design */
+    appearance: none;
+    /*custom styles*/
     width: 100%;
+    height: 4px;
     cursor: pointer;
     outline: none;
-    /* border-radius: 15px; */
-    /*  overflow: hidden;  remove this line*/
-    
-    /* New additions */
-    height: 3px;
-    /* background: var(--range-bg); */
-    background-color: var(--range-bg);
-  }
-  
-  
-  /* Thumb: webkit */
-  input[type="range"]::-webkit-slider-thumb {
-    /* removing default appearance */
+    border-radius: 15px;
+    background: var(--range-bg);
+}
+
+/* Thumb: webkit (chrome) browsers */
+input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    appearance: none; 
-    /* creating a custom design */
+    appearance: none;
+    /*custom styles */
     height: 16px;
     width: 16px;
-    background-color: var(--range-color);
-    border-radius: 50%;
-    border: none;  
-    transition: .2s ease-in-out;
-  }
-  
-  /* Thumb: Firefox */
-  input[type="range"]::-moz-range-thumb {
-    height: 14px;
-    width: 14px;
-    background-color: var(--range-color);
     border-radius: 50%;
     border: none;
+    background-color: var(--range-color);
     transition: .2s ease-in-out;
-  }
-  
-  /* Hover, active & focus Thumb: Webkit */
-  
-  input[type="range"]::-webkit-slider-thumb:hover {
-    box-shadow: 0 0 0 6px var(--range-hover);
-  }
-  input[type="range"]:active::-webkit-slider-thumb {
-    box-shadow: 0 0 0 8px var(--range-active);
-  }
-  
-  
-  /* Hover, active & focus Thumb: Firfox */
-  
-  input[type="range"]::-moz-range-thumb:hover {
-    box-shadow: 0 0 0 6px var(--range-hover);
-  }
-  input[type="range"]:active::-moz-range-thumb {
-    box-shadow: 0 0 0 8px var(--range-active);
-  }
-  
+}
 
-.control {
+/* Thumb: Firefox */
+input[type="range"]::-moz-range-thumb {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--range-color);
+    transition: .2s ease-in-out;
+}
+
+/* Hover, active & focus Thumb: Webkit (chrome) browsers*/
+input[type="range"]::-webkit-slider-thumb:hover {
+    box-shadow: 0 0 0 8px var(--range-hover);
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+    box-shadow: 0 0 0 8px var(--range-active);
+}
+
+/* Hover, active & focus Thumb: Firfox */
+input[type="range"]::-moz-range-thumb:hover {
+    box-shadow: 0 0 0 5px var(--range-hover);
+}
+
+input[type="range"]:active::-moz-range-thumb {
+    box-shadow: 0 0 0 8px var(--range-active);
+}
+
+.progess-style{
+    /* --percent : 0%; */
+    /* background: linear-gradient(to right, var(--range-color) var(--percent), var(--range-bg) var(--percent)); */
+}
+
+/******************************************************************/
+
+
+.control,
+.play-controls {
     padding: 0;
     width: 2.2rem;
     height: 2.2rem;
+}
+
+.control {
     background-color: var(--main-purple-color);
     border-radius: 50%;
     cursor: pointer;
@@ -514,11 +527,11 @@ input[type="range"] {
     justify-content: center;
     align-items: center;
     border: 1.8px solid #3333334f;
-    transition: all 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
 }
 
-.control:hover {
-    /* border-color: var(--main-purple-color); */
+.control:active {
+    transform: scale(0.9);
     background-color: var(--main-hover-color);
 }
 
@@ -544,9 +557,9 @@ input[type="range"] {
     fill: #3a393d;
 } */
 
-.time-control:hover {
+/* .time-control:hover {
     background-color: #3a393d;
-}
+} */
 
 
 /* .control > svg:hover{
