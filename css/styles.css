@@ -504,10 +504,53 @@ input[type="range"]:active::-moz-range-thumb {
     box-shadow: 0 0 0 8px var(--range-active);
 }
 
-.progess-style{
-    /* --percent : 0%; */
-    /* background: linear-gradient(to right, var(--range-color) var(--percent), var(--range-bg) var(--percent)); */
+/******************************************************************/
+.volume-control{
+    position: absolute;
+    width: 16%;
+    top: 0;
+    right: 0rem;
+    bottom: 0;
+    gap: 0.2rem;
 }
+
+.volume-control input[type="range"]{
+    width: 50%;
+    height: 2px;
+}
+
+.volume-control input[type="range"]::-webkit-slider-thumb{
+    width: 12px;
+    height: 12px;
+    opacity: 0;
+}
+.volume-control input[type="range"]::-webkit-slider-thumb:hover{
+    opacity: 1;
+}
+
+.volume-control input[type="range"]::-moz-range-thumb{
+    width: 12px;
+    height: 12px;
+    opacity: 0;
+}
+
+.volume-control input[type="range"]::-moz-range-thumb:hover{
+    opacity: 1;
+}
+
+
+.volume-control button{
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+}
+
+.volume-control button>svg{
+    fill: var(--range-bg);
+}
+
 
 /******************************************************************/
 

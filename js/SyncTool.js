@@ -7,6 +7,7 @@ import { Queue } from "./helpers/Queue.js";
 const currentEl = document.querySelector(".current");
 const durationEl = document.querySelector(".duration");
 const progressEl = document.querySelector(".progress-audio");
+const volumeBar = document.getElementById("volume-bar");
 const lyricsStorage = []
 const lyricQueue = Queue();
 //player elements
@@ -14,6 +15,8 @@ const playBtn  = document.getElementById("play-btn");
 const resumeBtn = document.getElementById("resume-btn");
 const backwardBtn  = document.getElementById("backward-btn");
 const forwardBtn  = document.getElementById("forward-btn");
+const muteBtn = document.getElementById("mute-btn");
+const unmuteBtn = document.getElementById("unmute-btn");
 let runningTest = false;
 //
 const track = new Audio();
@@ -51,6 +54,16 @@ function resumeButton(){
 function resetPlayButton(){
     playBtn.classList.remove("visually-hidden");
     resumeBtn.classList.add("visually-hidden");
+}
+
+function muteButton(){
+    muteBtn.classList.add("visually-hidden");
+    unmuteBtn.classList.remove("visually-hidden");
+}
+
+function unmuteButton(){
+    muteBtn.classList.remove("visually-hidden");
+    unmuteBtn.classList.add("visually-hidden");
 }
 
 function clearLyricTable() {
@@ -94,6 +107,7 @@ function saveLyrics() {
 export default (() => {
     track.addEventListener("loadedmetadata", e => {
         progressEl.max = Math.round(track.duration);
+        volumeBar.style.background = `linear-gradient(to right, var(--range-color) ${volumeBar.value}%, var(--range-bg) ${volumeBar.value}%)`;
         durationEl.textContent = `${Time.parseMm(track.duration)}:${Time.parseSs(track.duration)}`;
     });
 
@@ -106,12 +120,27 @@ export default (() => {
             runLyricTest();
     });
 
+    track.addEventListener("volumechange", e=> {
+        if(track.volume > 0)
+            unmuteButton();
+        else if(track.volume == 0)
+            muteButton();
+        volumeBar.style.background = `linear-gradient(to right, var(--range-color) ${Math.round(track.volume*100)}%, var(--range-bg) ${Math.round(track.volume*100)}%)`;
+        console.log(track.volume*100)
+    });
+
     track.addEventListener("ended", resetPlayButton);
 
     progressEl.addEventListener("input", e => {
         track.currentTime = e.target.value;
-    })
+    });
+
+    volumeBar.addEventListener("input", () => track.volume = volumeBar.value / 100);
     
+    muteBtn.addEventListener("click",()=> track.volume = 0);
+    
+    unmuteBtn.addEventListener("click",()=> track.volume = 1);
+
     playBtn.addEventListener("click", playButton);
 
     resumeBtn.addEventListener("click", resumeButton);
